@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5cf0a4d9daa64ace9e3f64ead24be0f1" Name="Diagram1" ZoomLevel="88" >
+        <EntityTypeShape EntityType="DbModel.Form" Width="1.5" PointX="8.25" PointY="7" />
+        <EntityTypeShape EntityType="DbModel.Module" Width="1.5" PointX="3.375" PointY="7" />
+        <EntityTypeShape EntityType="DbModel.FormModule" Width="1.5" PointX="5.5" PointY="7" />
+        <AssociationConnector Association="DbModel.FormModuleForm" />
+        <AssociationConnector Association="DbModel.ModuleFormModule" />
+        <EntityTypeShape EntityType="DbModel.User" Width="1.5" PointX="1.375" PointY="2" />
+        <EntityTypeShape EntityType="DbModel.RolUser" Width="1.5" PointX="4.375" PointY="2.125" />
+        <EntityTypeShape EntityType="DbModel.Rol" Width="1.5" PointX="6.875" PointY="2.25" />
+        <EntityTypeShape EntityType="DbModel.RolFormPermission" Width="1.5" PointX="10.625" PointY="4.125" />
+        <EntityTypeShape EntityType="DbModel.Permission" Width="1.5" PointX="14.125" PointY="4.5" />
+        <EntityTypeShape EntityType="DbModel.ChangeLog" Width="1.5" PointX="0.5" PointY="6.125" FillColor="255, 192, 192" />
+        <AssociationConnector Association="DbModel.UserRolUser" />
+        <AssociationConnector Association="DbModel.RolUserRol" />
+        <AssociationConnector Association="DbModel.RolRolFormPermission" />
+        <AssociationConnector Association="DbModel.FormRolFormPermission" />
+        <AssociationConnector Association="DbModel.RolFormPermissionPermission" />
+        <AssociationConnector Association="DbModel.UserChangeLog" />
+        <EntityTypeShape EntityType="DbModel.FavoriteUser" Width="1.5" PointX="14.25" PointY="0.75" />
+        <EntityTypeShape EntityType="DbModel.ServiceProvider" Width="1.5" PointX="16.375" PointY="0.75" />
+        <AssociationConnector Association="DbModel.UserFavoriteUser" />
+        <AssociationConnector Association="DbModel.UserServiceProvider" />
+        <EntityTypeShape EntityType="DbModel.Service" Width="1.5" PointX="19" PointY="0.75" />
+        <AssociationConnector Association="DbModel.ServiceFavoriteUser" />
+        <EntityTypeShape EntityType="DbModel.DestinationService" Width="1.5" PointX="21.375" PointY="1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
