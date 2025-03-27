@@ -288,6 +288,54 @@ namespace Diagram
             }
         }
         private ObjectSet<DestinationService> _DestinationsServices;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<Imagen> Imagens
+        {
+            get
+            {
+                if ((_Imagens == null))
+                {
+                    _Imagens = base.CreateObjectSet<Imagen>("Imagens");
+                }
+                return _Imagens;
+            }
+        }
+        private ObjectSet<Imagen> _Imagens;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<reservation_detail> reservation_details
+        {
+            get
+            {
+                if ((_reservation_details == null))
+                {
+                    _reservation_details = base.CreateObjectSet<reservation_detail>("reservation_details");
+                }
+                return _reservation_details;
+            }
+        }
+        private ObjectSet<reservation_detail> _reservation_details;
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        public ObjectSet<Tag> TagSet
+        {
+            get
+            {
+                if ((_TagSet == null))
+                {
+                    _TagSet = base.CreateObjectSet<Tag>("TagSet");
+                }
+                return _TagSet;
+            }
+        }
+        private ObjectSet<Tag> _TagSet;
 
         #endregion
 
@@ -395,6 +443,30 @@ namespace Diagram
         public void AddToDestinationsServices(DestinationService destinationService)
         {
             base.AddObject("DestinationsServices", destinationService);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet Imagens. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToImagens(Imagen imagen)
+        {
+            base.AddObject("Imagens", imagen);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet reservation_details. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToreservation_details(reservation_detail reservation_detail)
+        {
+            base.AddObject("reservation_details", reservation_detail);
+        }
+    
+        /// <summary>
+        /// Método desusado para agregar un nuevo objeto al EntitySet TagSet. Considere la posibilidad de usar el método .Add de la propiedad ObjectSet&lt;T&gt; asociada.
+        /// </summary>
+        public void AddToTagSet(Tag tag)
+        {
+            base.AddObject("TagSet", tag);
         }
 
         #endregion
@@ -1510,6 +1582,244 @@ namespace Diagram
     /// <summary>
     /// No hay documentación de metadatos disponible.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DbModel", Name="Imagen")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Imagen : EntityObject
+    {
+        #region Método de generador
+    
+        /// <summary>
+        /// Crear un nuevo objeto Imagen.
+        /// </summary>
+        /// <param name="id">Valor inicial de la propiedad Id.</param>
+        /// <param name="id_image">Valor inicial de la propiedad id_image.</param>
+        /// <param name="id_reference">Valor inicial de la propiedad id_reference.</param>
+        /// <param name="reference_type">Valor inicial de la propiedad reference_type.</param>
+        /// <param name="url">Valor inicial de la propiedad url.</param>
+        /// <param name="title">Valor inicial de la propiedad title.</param>
+        /// <param name="description">Valor inicial de la propiedad description.</param>
+        /// <param name="order">Valor inicial de la propiedad order.</param>
+        public static Imagen CreateImagen(global::System.Int32 id, global::System.String id_image, global::System.String id_reference, global::System.String reference_type, global::System.String url, global::System.String title, global::System.String description, global::System.String order)
+        {
+            Imagen imagen = new Imagen();
+            imagen.Id = id;
+            imagen.id_image = id_image;
+            imagen.id_reference = id_reference;
+            imagen.reference_type = reference_type;
+            imagen.url = url;
+            imagen.title = title;
+            imagen.description = description;
+            imagen.order = order;
+            return imagen;
+        }
+
+        #endregion
+
+        #region Propiedades simples
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String id_image
+        {
+            get
+            {
+                return _id_image;
+            }
+            set
+            {
+                Onid_imageChanging(value);
+                ReportPropertyChanging("id_image");
+                _id_image = StructuralObject.SetValidValue(value, false, "id_image");
+                ReportPropertyChanged("id_image");
+                Onid_imageChanged();
+            }
+        }
+        private global::System.String _id_image;
+        partial void Onid_imageChanging(global::System.String value);
+        partial void Onid_imageChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String id_reference
+        {
+            get
+            {
+                return _id_reference;
+            }
+            set
+            {
+                Onid_referenceChanging(value);
+                ReportPropertyChanging("id_reference");
+                _id_reference = StructuralObject.SetValidValue(value, false, "id_reference");
+                ReportPropertyChanged("id_reference");
+                Onid_referenceChanged();
+            }
+        }
+        private global::System.String _id_reference;
+        partial void Onid_referenceChanging(global::System.String value);
+        partial void Onid_referenceChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String reference_type
+        {
+            get
+            {
+                return _reference_type;
+            }
+            set
+            {
+                Onreference_typeChanging(value);
+                ReportPropertyChanging("reference_type");
+                _reference_type = StructuralObject.SetValidValue(value, false, "reference_type");
+                ReportPropertyChanged("reference_type");
+                Onreference_typeChanged();
+            }
+        }
+        private global::System.String _reference_type;
+        partial void Onreference_typeChanging(global::System.String value);
+        partial void Onreference_typeChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String url
+        {
+            get
+            {
+                return _url;
+            }
+            set
+            {
+                OnurlChanging(value);
+                ReportPropertyChanging("url");
+                _url = StructuralObject.SetValidValue(value, false, "url");
+                ReportPropertyChanged("url");
+                OnurlChanged();
+            }
+        }
+        private global::System.String _url;
+        partial void OnurlChanging(global::System.String value);
+        partial void OnurlChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String title
+        {
+            get
+            {
+                return _title;
+            }
+            set
+            {
+                OntitleChanging(value);
+                ReportPropertyChanging("title");
+                _title = StructuralObject.SetValidValue(value, false, "title");
+                ReportPropertyChanged("title");
+                OntitleChanged();
+            }
+        }
+        private global::System.String _title;
+        partial void OntitleChanging(global::System.String value);
+        partial void OntitleChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                OndescriptionChanging(value);
+                ReportPropertyChanging("description");
+                _description = StructuralObject.SetValidValue(value, false, "description");
+                ReportPropertyChanged("description");
+                OndescriptionChanged();
+            }
+        }
+        private global::System.String _description;
+        partial void OndescriptionChanging(global::System.String value);
+        partial void OndescriptionChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String order
+        {
+            get
+            {
+                return _order;
+            }
+            set
+            {
+                OnorderChanging(value);
+                ReportPropertyChanging("order");
+                _order = StructuralObject.SetValidValue(value, false, "order");
+                ReportPropertyChanged("order");
+                OnorderChanged();
+            }
+        }
+        private global::System.String _order;
+        partial void OnorderChanging(global::System.String value);
+        partial void OnorderChanged();
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No hay documentación de metadatos disponible.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="DbModel", Name="Module")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -1848,6 +2158,244 @@ namespace Diagram
                 }
             }
         }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No hay documentación de metadatos disponible.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DbModel", Name="reservation_detail")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class reservation_detail : EntityObject
+    {
+        #region Método de generador
+    
+        /// <summary>
+        /// Crear un nuevo objeto reservation_detail.
+        /// </summary>
+        /// <param name="id">Valor inicial de la propiedad Id.</param>
+        /// <param name="id_detail">Valor inicial de la propiedad id_detail.</param>
+        /// <param name="id_reservation">Valor inicial de la propiedad id_reservation.</param>
+        /// <param name="id_service">Valor inicial de la propiedad id_service.</param>
+        /// <param name="service_date">Valor inicial de la propiedad service_date.</param>
+        /// <param name="service_time">Valor inicial de la propiedad service_time.</param>
+        /// <param name="number_of_people">Valor inicial de la propiedad number_of_people.</param>
+        /// <param name="subtotal">Valor inicial de la propiedad subtotal.</param>
+        public static reservation_detail Createreservation_detail(global::System.Int32 id, global::System.String id_detail, global::System.String id_reservation, global::System.String id_service, global::System.String service_date, global::System.String service_time, global::System.String number_of_people, global::System.String subtotal)
+        {
+            reservation_detail reservation_detail = new reservation_detail();
+            reservation_detail.Id = id;
+            reservation_detail.id_detail = id_detail;
+            reservation_detail.id_reservation = id_reservation;
+            reservation_detail.id_service = id_service;
+            reservation_detail.service_date = service_date;
+            reservation_detail.service_time = service_time;
+            reservation_detail.number_of_people = number_of_people;
+            reservation_detail.subtotal = subtotal;
+            return reservation_detail;
+        }
+
+        #endregion
+
+        #region Propiedades simples
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String id_detail
+        {
+            get
+            {
+                return _id_detail;
+            }
+            set
+            {
+                Onid_detailChanging(value);
+                ReportPropertyChanging("id_detail");
+                _id_detail = StructuralObject.SetValidValue(value, false, "id_detail");
+                ReportPropertyChanged("id_detail");
+                Onid_detailChanged();
+            }
+        }
+        private global::System.String _id_detail;
+        partial void Onid_detailChanging(global::System.String value);
+        partial void Onid_detailChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String id_reservation
+        {
+            get
+            {
+                return _id_reservation;
+            }
+            set
+            {
+                Onid_reservationChanging(value);
+                ReportPropertyChanging("id_reservation");
+                _id_reservation = StructuralObject.SetValidValue(value, false, "id_reservation");
+                ReportPropertyChanged("id_reservation");
+                Onid_reservationChanged();
+            }
+        }
+        private global::System.String _id_reservation;
+        partial void Onid_reservationChanging(global::System.String value);
+        partial void Onid_reservationChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String id_service
+        {
+            get
+            {
+                return _id_service;
+            }
+            set
+            {
+                Onid_serviceChanging(value);
+                ReportPropertyChanging("id_service");
+                _id_service = StructuralObject.SetValidValue(value, false, "id_service");
+                ReportPropertyChanged("id_service");
+                Onid_serviceChanged();
+            }
+        }
+        private global::System.String _id_service;
+        partial void Onid_serviceChanging(global::System.String value);
+        partial void Onid_serviceChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String service_date
+        {
+            get
+            {
+                return _service_date;
+            }
+            set
+            {
+                Onservice_dateChanging(value);
+                ReportPropertyChanging("service_date");
+                _service_date = StructuralObject.SetValidValue(value, false, "service_date");
+                ReportPropertyChanged("service_date");
+                Onservice_dateChanged();
+            }
+        }
+        private global::System.String _service_date;
+        partial void Onservice_dateChanging(global::System.String value);
+        partial void Onservice_dateChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String service_time
+        {
+            get
+            {
+                return _service_time;
+            }
+            set
+            {
+                Onservice_timeChanging(value);
+                ReportPropertyChanging("service_time");
+                _service_time = StructuralObject.SetValidValue(value, false, "service_time");
+                ReportPropertyChanged("service_time");
+                Onservice_timeChanged();
+            }
+        }
+        private global::System.String _service_time;
+        partial void Onservice_timeChanging(global::System.String value);
+        partial void Onservice_timeChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String number_of_people
+        {
+            get
+            {
+                return _number_of_people;
+            }
+            set
+            {
+                Onnumber_of_peopleChanging(value);
+                ReportPropertyChanging("number_of_people");
+                _number_of_people = StructuralObject.SetValidValue(value, false, "number_of_people");
+                ReportPropertyChanged("number_of_people");
+                Onnumber_of_peopleChanged();
+            }
+        }
+        private global::System.String _number_of_people;
+        partial void Onnumber_of_peopleChanging(global::System.String value);
+        partial void Onnumber_of_peopleChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String subtotal
+        {
+            get
+            {
+                return _subtotal;
+            }
+            set
+            {
+                OnsubtotalChanging(value);
+                ReportPropertyChanging("subtotal");
+                _subtotal = StructuralObject.SetValidValue(value, false, "subtotal");
+                ReportPropertyChanged("subtotal");
+                OnsubtotalChanged();
+            }
+        }
+        private global::System.String _subtotal;
+        partial void OnsubtotalChanging(global::System.String value);
+        partial void OnsubtotalChanged();
 
         #endregion
 
@@ -3352,6 +3900,114 @@ namespace Diagram
                 }
             }
         }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No hay documentación de metadatos disponible.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DbModel", Name="Tag")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Tag : EntityObject
+    {
+        #region Método de generador
+    
+        /// <summary>
+        /// Crear un nuevo objeto Tag.
+        /// </summary>
+        /// <param name="id">Valor inicial de la propiedad Id.</param>
+        /// <param name="id_tag">Valor inicial de la propiedad id_tag.</param>
+        /// <param name="name">Valor inicial de la propiedad name.</param>
+        public static Tag CreateTag(global::System.Int32 id, global::System.String id_tag, global::System.String name)
+        {
+            Tag tag = new Tag();
+            tag.Id = id;
+            tag.id_tag = id_tag;
+            tag.name = name;
+            return tag;
+        }
+
+        #endregion
+
+        #region Propiedades simples
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String id_tag
+        {
+            get
+            {
+                return _id_tag;
+            }
+            set
+            {
+                Onid_tagChanging(value);
+                ReportPropertyChanging("id_tag");
+                _id_tag = StructuralObject.SetValidValue(value, false, "id_tag");
+                ReportPropertyChanged("id_tag");
+                Onid_tagChanged();
+            }
+        }
+        private global::System.String _id_tag;
+        partial void Onid_tagChanging(global::System.String value);
+        partial void Onid_tagChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                OnnameChanging(value);
+                ReportPropertyChanging("name");
+                _name = StructuralObject.SetValidValue(value, false, "name");
+                ReportPropertyChanged("name");
+                OnnameChanged();
+            }
+        }
+        private global::System.String _name;
+        partial void OnnameChanging(global::System.String value);
+        partial void OnnameChanged();
 
         #endregion
 

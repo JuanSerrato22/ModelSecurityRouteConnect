@@ -70,6 +70,9 @@
             <End Role="FavoriteUser" EntitySet="FavoritesUsers" />
           </AssociationSet>
           <EntitySet Name="DestinationsServices" EntityType="DbModel.DestinationService" />
+          <EntitySet Name="Imagens" EntityType="DbModel.Imagen" />
+          <EntitySet Name="reservation_details" EntityType="DbModel.reservation_detail" />
+          <EntitySet Name="TagSet" EntityType="DbModel.Tag" />
         </EntityContainer>
         <EntityType Name="Form">
           <Key>
@@ -349,6 +352,40 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Property1" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Imagen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_image" Type="String" Nullable="false" />
+          <Property Name="id_reference" Type="String" Nullable="false" />
+          <Property Name="reference_type" Type="String" Nullable="false" />
+          <Property Name="url" Type="String" Nullable="false" />
+          <Property Name="title" Type="String" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="false" />
+          <Property Name="order" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reservation_detail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_detail" Type="String" Nullable="false" />
+          <Property Name="id_reservation" Type="String" Nullable="false" />
+          <Property Name="id_service" Type="String" Nullable="false" />
+          <Property Name="service_date" Type="String" Nullable="false" />
+          <Property Name="service_time" Type="String" Nullable="false" />
+          <Property Name="number_of_people" Type="String" Nullable="false" />
+          <Property Name="subtotal" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_tag" Type="String" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
