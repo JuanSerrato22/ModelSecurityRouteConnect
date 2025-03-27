@@ -73,6 +73,13 @@
           <EntitySet Name="Imagens" EntityType="DbModel.Imagen" />
           <EntitySet Name="reservation_details" EntityType="DbModel.reservation_detail" />
           <EntitySet Name="TagSet" EntityType="DbModel.Tag" />
+          <EntitySet Name="service_categorys" EntityType="DbModel.service_category" />
+          <EntitySet Name="AvailabilitySet" EntityType="DbModel.Availability" />
+          <EntitySet Name="ReviewSet" EntityType="DbModel.Review" />
+          <EntitySet Name="BlogSet" EntityType="DbModel.Blog" />
+          <EntitySet Name="notifications" EntityType="DbModel.notification" />
+          <EntitySet Name="payments" EntityType="DbModel.payment" />
+          <EntitySet Name="blog_tags" EntityType="DbModel.blog_tag" />
         </EntityContainer>
         <EntityType Name="Form">
           <Key>
@@ -94,7 +101,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Code" Type="String" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Active" Type="String" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="FormModule" Relationship="DbModel.ModuleFormModule" FromRole="Module" ToRole="FormModule" />
           <Property Name="DeleteAt" Type="String" Nullable="false" />
           <Property Name="CreateAt" Type="String" Nullable="false" />
@@ -287,7 +294,7 @@
           <Property Name="Bilingual" Type="String" Nullable="false" />
           <Property Name="Languages" Type="String" Nullable="false" />
           <Property Name="AverageRating" Type="String" Nullable="false" />
-          <Property Name="verified" Type="String" Nullable="false" />
+          <Property Name="Verified" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="User" Relationship="DbModel.UserServiceProvider" FromRole="ServiceProvider" ToRole="User" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
         </EntityType>
@@ -330,8 +337,7 @@
           <Property Name="MaximumCapacity" Type="String" Nullable="false" />
           <Property Name="Available" Type="String" Nullable="false" />
           <Property Name="Requirements" Type="String" Nullable="false" />
-          <Property Name="Includes" Type="String" Nullable="false" />
-          <Property Name="NotIncluded" Type="String" Nullable="false" />
+          <Property Name="Includes" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="FavoriteUser" Relationship="DbModel.ServiceFavoriteUser" FromRole="Service" ToRole="FavoriteUser" />
         </EntityType>
         <Association Name="ServiceFavoriteUser">
@@ -386,6 +392,89 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_tag" Type="String" Nullable="false" />
           <Property Name="name" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="service_category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_category" Type="String" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="false" />
+          <Property Name="icon" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Availability">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_availability" Type="String" Nullable="false" />
+          <Property Name="id_service" Type="String" Nullable="false" />
+          <Property Name="date" Type="String" Nullable="false" />
+          <Property Name="start_time" Type="String" Nullable="false" />
+          <Property Name="end_time" Type="String" Nullable="false" />
+          <Property Name="available" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_review" Type="String" Nullable="false" />
+          <Property Name="id_user" Type="String" Nullable="false" />
+          <Property Name="id_service" Type="String" Nullable="false" />
+          <Property Name="rating" Type="String" Nullable="false" />
+          <Property Name="comment" Type="String" Nullable="false" />
+          <Property Name="review_date" Type="String" Nullable="false" />
+          <Property Name="approved" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_blog" Type="String" Nullable="false" />
+          <Property Name="id_user" Type="String" Nullable="false" />
+          <Property Name="title" Type="String" Nullable="false" />
+          <Property Name="content" Type="String" Nullable="false" />
+          <Property Name="publish_date" Type="String" Nullable="false" />
+          <Property Name="featured_image" Type="String" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="views" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_notification" Type="String" Nullable="false" />
+          <Property Name="id_user" Type="String" Nullable="false" />
+          <Property Name="title" Type="String" Nullable="false" />
+          <Property Name="message" Type="String" Nullable="false" />
+          <Property Name="creation_date" Type="String" Nullable="false" />
+          <Property Name="read" Type="String" Nullable="false" />
+          <Property Name="notification_type" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_payment" Type="String" Nullable="false" />
+          <Property Name="id_reservation" Type="String" Nullable="false" />
+          <Property Name="amount" Type="String" Nullable="false" />
+          <Property Name="payment_date" Type="String" Nullable="false" />
+          <Property Name="payment_method" Type="String" Nullable="false" />
+          <Property Name="payment_reference" Type="String" Nullable="false" />
+          <Property Name="payment_status" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="blog_tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_blog" Type="String" Nullable="false" />
+          <Property Name="id_tag" Type="String" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
