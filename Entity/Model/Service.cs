@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
-namespace Entity.DTOs
+namespace Entity.Model
 {
-    class Service
+    public class Service
     {
-        public int ServiceId { get; set; }
+        public int IdService { get; set; }
+        public int IdSupplier { get; set; }
+        public int IdCategory { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public decimal Price { get; set; }
+        public bool BasePrice { get; set; }
         public int Duration { get; set; }
         public int MaximumCapacity { get; set; }
-        public string Requeriments { get; set; }
+        public bool Available { get; set; }
+        public string Requirements { get; set; }
+        public bool Includes { get; set; }
     }
+
 }

@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
-namespace Entity.DTOs
+namespace Entity.Model
 {
-    internal class Pay
+    public class Pay
     {
-        public int PayId { get; set; }
-        public int Amount { get; set; }
-        public int PayDate { get; set; }
-        public string PayMethod { get; set; }
-        public int PaymentReference { get; set; }
+        public int IdPay { get; set; }
+        public int IdReservation { get; set; }
+        public decimal Amount { get; set; }
+        public DateTime PaymentDate { get; set; }
+        public double  PaymentMethod{ get; set; }
+        public string PaymentReferefence { get; set; }
+        public double Status { get; set; }
     }
 }
+

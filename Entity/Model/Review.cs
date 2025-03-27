@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Entity.DTOs
+namespace Entity.Model
 {
-    internal class Review
+    public class Review
     {
-        public int ReviewId { get; set; }
+        public int IdReview { get; set; }
+        public int IdUser { get; set; }
+        public int IdService { get; set; }
         public int Qualification { get; set; }
-        public string Comment { get; set; }
-        public string ReviewDate { get; set; }
+        public string Comment { get; set; }  
+        public DateTime DateReview { get; set; }
+        public bool Approve { get; set; }
     }
 }

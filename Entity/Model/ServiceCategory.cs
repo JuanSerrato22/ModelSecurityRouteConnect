@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Entity.DTOs
+namespace Entity.Model
 {
-    internal class ServiceCategoryDTO
+    public class ServiceCategory
     {
-        public int CategoryId { get; set; }
-        public string name { get; set; }
+        public int IdCategory { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
+        public string Icon { get; set; }
     }
 }

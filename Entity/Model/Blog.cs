@@ -1,15 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
-namespace Entity.DTOs
+namespace Entity.Model
 {
-    internal class Blog
+    public class Blog
     {
-        public int BlogId { get; set; }
-        public string Title { get; set; }
+        public int IdBlog { get; set; }
+        public int IdUser { get; set; }
+        public string Qualification { get; set; }
         public string Content { get; set; }
-    }
+        public DateTime PublicationDate { get; set; }
+        public string FeaturedImage { get; set; }
+        public bool Asset { get; set; }
+        public int Visits { get; set; }
+
+
+
+   }
 }
