@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Entity.DTOs
+namespace Entity.Model
 {
-    class Destination
+    public class DestinationDTO
     {
-        public int DestinationId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int Latitude { get; set; }
-        public int Length { get; set; }
+        public double Latitude { get; set; }
+        public double Length { get; set; }
         public string Address { get; set; }
-        public int OpeningHours { get; set; }
-        public string Recomendations { get; set; }
-        public string Weather { get; set; }
+        public string OpeningHours { get; set; }
+        public string Recommendations { get; set; }
+        public string Climate { get; set; }
+        public string IdealSeason { get; set; }
     }
 }

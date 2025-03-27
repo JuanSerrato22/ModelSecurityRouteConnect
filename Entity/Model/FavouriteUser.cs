@@ -1,6 +1,6 @@
 namespace Entity.Model
 {
-    public class FavouriteUser
+    public class FavouriteUserDTO
     {
         public int IdUser { get; set; }
         public int IdService { get; set; }

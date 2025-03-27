@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entity.DTOs
+namespace Entity.Model
 {
-    class Rol
+    class RolDTO
     {
-        public int RolId { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-    }
+        public string FirstName { get; set; }
 }
+}
+    

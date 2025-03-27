@@ -1,6 +1,6 @@
 namespace Entity.Model
 {
-    public class ReservationDetail
+    public class ReservationDetailDTO
     {
         public int IdDetail { get; set; }
         public int IdReservation { get; set; }

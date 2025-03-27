@@ -2,7 +2,7 @@ using System;
 
 namespace Entity.Model
 {
-    public class User
+    public class UserDTO
     {
         public int IdUser { get; set; }
         public string FirstName { get; set; }

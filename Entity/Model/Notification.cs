@@ -2,7 +2,7 @@ using System;
 
 namespace Entity.Model
 {
-    public class Notification
+    public class NotificationDTO
     {
         public int IdNotification { get; set; }
         public int IdUser { get; set; }

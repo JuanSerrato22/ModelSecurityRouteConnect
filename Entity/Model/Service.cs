@@ -2,7 +2,7 @@ using System;
 
 namespace Entity.Model
 {
-    public class Service
+    public class ServiceDTO
     {
         public int IdService { get; set; }
         public int IdSupplier { get; set; }

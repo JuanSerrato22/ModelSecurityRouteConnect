@@ -1,6 +1,6 @@
 namespace Entity.Model
 {
-    public class Review
+    public class ReviewDTO
     {
         public int IdReview { get; set; }
         public int IdUser { get; set; }

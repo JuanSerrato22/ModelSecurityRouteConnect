@@ -1,6 +1,6 @@
 namespace Entity.Model
 {
-    public class Destination
+    public class DestinationDTO
     {
         public int IdDestination { get; set; }
         public string Name { get; set; }

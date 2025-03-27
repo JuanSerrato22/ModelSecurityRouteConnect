@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Model
 {
-    class Rol
+    class RolDTO
     {
         public string FirstName { get; set; }
 }

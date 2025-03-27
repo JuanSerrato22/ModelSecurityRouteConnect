@@ -2,7 +2,7 @@ using System;
 
 namespace Entity.Model
 {
-    public class Pay
+    public class PayDTO
     {
         public int IdPay { get; set; }
         public int IdReservation { get; set; }

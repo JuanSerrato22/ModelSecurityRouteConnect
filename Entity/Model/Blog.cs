@@ -2,7 +2,7 @@ using System;
 
 namespace Entity.Model
 {
-    public class Blog
+    public class BlogDTO
     {
         public int IdBlog { get; set; }
         public int IdUser { get; set; }
