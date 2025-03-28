@@ -665,7 +665,7 @@ namespace Diagram
         /// <param name="start_time">Valor inicial de la propiedad start_time.</param>
         /// <param name="end_time">Valor inicial de la propiedad end_time.</param>
         /// <param name="available">Valor inicial de la propiedad available.</param>
-        public static Availability CreateAvailability(global::System.Int32 id, global::System.String id_availability, global::System.String id_service, global::System.String date, global::System.String start_time, global::System.String end_time, global::System.Boolean available)
+        public static Availability CreateAvailability(global::System.Int32 id, global::System.String id_availability, global::System.String id_service, global::System.String date, global::System.String start_time, global::System.String end_time, global::System.String available)
         {
             Availability availability = new Availability();
             availability.Id = id;
@@ -834,7 +834,7 @@ namespace Diagram
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean available
+        public global::System.String available
         {
             get
             {
@@ -844,13 +844,13 @@ namespace Diagram
             {
                 OnavailableChanging(value);
                 ReportPropertyChanging("available");
-                _available = StructuralObject.SetValidValue(value, "available");
+                _available = StructuralObject.SetValidValue(value, false, "available");
                 ReportPropertyChanged("available");
                 OnavailableChanged();
             }
         }
-        private global::System.Boolean _available;
-        partial void OnavailableChanging(global::System.Boolean value);
+        private global::System.String _available;
+        partial void OnavailableChanging(global::System.String value);
         partial void OnavailableChanged();
 
         #endregion
@@ -879,7 +879,7 @@ namespace Diagram
         /// <param name="featured_image">Valor inicial de la propiedad featured_image.</param>
         /// <param name="active">Valor inicial de la propiedad active.</param>
         /// <param name="views">Valor inicial de la propiedad views.</param>
-        public static Blog CreateBlog(global::System.Int32 id, global::System.String id_blog, global::System.String id_user, global::System.String title, global::System.String content, global::System.String publish_date, global::System.String featured_image, global::System.Boolean active, global::System.String views)
+        public static Blog CreateBlog(global::System.Int32 id, global::System.String id_blog, global::System.String id_user, global::System.String title, global::System.String content, global::System.String publish_date, global::System.String featured_image, global::System.String active, global::System.String views)
         {
             Blog blog = new Blog();
             blog.Id = id;
@@ -1074,7 +1074,7 @@ namespace Diagram
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean active
+        public global::System.String active
         {
             get
             {
@@ -1084,13 +1084,13 @@ namespace Diagram
             {
                 OnactiveChanging(value);
                 ReportPropertyChanging("active");
-                _active = StructuralObject.SetValidValue(value, "active");
+                _active = StructuralObject.SetValidValue(value, false, "active");
                 ReportPropertyChanged("active");
                 OnactiveChanged();
             }
         }
-        private global::System.Boolean _active;
-        partial void OnactiveChanging(global::System.Boolean value);
+        private global::System.String _active;
+        partial void OnactiveChanging(global::System.String value);
         partial void OnactiveChanged();
     
         /// <summary>
@@ -2588,7 +2588,7 @@ namespace Diagram
         /// <param name="active">Valor inicial de la propiedad Active.</param>
         /// <param name="deleteAt">Valor inicial de la propiedad DeleteAt.</param>
         /// <param name="createAt">Valor inicial de la propiedad CreateAt.</param>
-        public static Module CreateModule(global::System.Int32 id, global::System.String code, global::System.String name, global::System.Boolean active, global::System.String deleteAt, global::System.String createAt)
+        public static Module CreateModule(global::System.Int32 id, global::System.String code, global::System.String name, global::System.String active, global::System.String deleteAt, global::System.String createAt)
         {
             Module module = new Module();
             module.Id = id;
@@ -2684,7 +2684,7 @@ namespace Diagram
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean Active
+        public global::System.String Active
         {
             get
             {
@@ -2694,13 +2694,13 @@ namespace Diagram
             {
                 OnActiveChanging(value);
                 ReportPropertyChanging("Active");
-                _Active = StructuralObject.SetValidValue(value, "Active");
+                _Active = StructuralObject.SetValidValue(value, false, "Active");
                 ReportPropertyChanged("Active");
                 OnActiveChanged();
             }
         }
-        private global::System.Boolean _Active;
-        partial void OnActiveChanging(global::System.Boolean value);
+        private global::System.String _Active;
+        partial void OnActiveChanging(global::System.String value);
         partial void OnActiveChanged();
     
         /// <summary>
@@ -3650,7 +3650,7 @@ namespace Diagram
         /// <param name="comment">Valor inicial de la propiedad comment.</param>
         /// <param name="review_date">Valor inicial de la propiedad review_date.</param>
         /// <param name="approved">Valor inicial de la propiedad approved.</param>
-        public static Review CreateReview(global::System.Int32 id, global::System.String id_review, global::System.String id_user, global::System.String id_service, global::System.String rating, global::System.String comment, global::System.String review_date, global::System.Boolean approved)
+        public static Review CreateReview(global::System.Int32 id, global::System.String id_review, global::System.String id_user, global::System.String id_service, global::System.String rating, global::System.String comment, global::System.String review_date, global::System.String approved)
         {
             Review review = new Review();
             review.Id = id;
@@ -3844,7 +3844,7 @@ namespace Diagram
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean approved
+        public global::System.String approved
         {
             get
             {
@@ -3854,13 +3854,13 @@ namespace Diagram
             {
                 OnapprovedChanging(value);
                 ReportPropertyChanging("approved");
-                _approved = StructuralObject.SetValidValue(value, "approved");
+                _approved = StructuralObject.SetValidValue(value, false, "approved");
                 ReportPropertyChanged("approved");
                 OnapprovedChanged();
             }
         }
-        private global::System.Boolean _approved;
-        partial void OnapprovedChanging(global::System.Boolean value);
+        private global::System.String _approved;
+        partial void OnapprovedChanging(global::System.String value);
         partial void OnapprovedChanged();
 
         #endregion
@@ -4618,7 +4618,8 @@ namespace Diagram
         /// <param name="available">Valor inicial de la propiedad Available.</param>
         /// <param name="requirements">Valor inicial de la propiedad Requirements.</param>
         /// <param name="includes">Valor inicial de la propiedad Includes.</param>
-        public static Service CreateService(global::System.Int32 id, global::System.String idService, global::System.String idProvider, global::System.String idCategory, global::System.String name, global::System.String description, global::System.String basePrice, global::System.String duration, global::System.String maximumCapacity, global::System.String available, global::System.String requirements, global::System.Boolean includes)
+        /// <param name="notIncluded">Valor inicial de la propiedad NotIncluded.</param>
+        public static Service CreateService(global::System.Int32 id, global::System.String idService, global::System.String idProvider, global::System.String idCategory, global::System.String name, global::System.String description, global::System.String basePrice, global::System.String duration, global::System.String maximumCapacity, global::System.String available, global::System.String requirements, global::System.String includes, global::System.String notIncluded)
         {
             Service service = new Service();
             service.Id = id;
@@ -4633,6 +4634,7 @@ namespace Diagram
             service.Available = available;
             service.Requirements = requirements;
             service.Includes = includes;
+            service.NotIncluded = notIncluded;
             return service;
         }
 
@@ -4912,7 +4914,7 @@ namespace Diagram
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean Includes
+        public global::System.String Includes
         {
             get
             {
@@ -4922,14 +4924,38 @@ namespace Diagram
             {
                 OnIncludesChanging(value);
                 ReportPropertyChanging("Includes");
-                _Includes = StructuralObject.SetValidValue(value, "Includes");
+                _Includes = StructuralObject.SetValidValue(value, false, "Includes");
                 ReportPropertyChanged("Includes");
                 OnIncludesChanged();
             }
         }
-        private global::System.Boolean _Includes;
-        partial void OnIncludesChanging(global::System.Boolean value);
+        private global::System.String _Includes;
+        partial void OnIncludesChanging(global::System.String value);
         partial void OnIncludesChanged();
+    
+        /// <summary>
+        /// No hay documentación de metadatos disponible.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String NotIncluded
+        {
+            get
+            {
+                return _NotIncluded;
+            }
+            set
+            {
+                OnNotIncludedChanging(value);
+                ReportPropertyChanging("NotIncluded");
+                _NotIncluded = StructuralObject.SetValidValue(value, false, "NotIncluded");
+                ReportPropertyChanged("NotIncluded");
+                OnNotIncludedChanged();
+            }
+        }
+        private global::System.String _NotIncluded;
+        partial void OnNotIncludedChanging(global::System.String value);
+        partial void OnNotIncludedChanged();
 
         #endregion
 
@@ -5144,9 +5170,9 @@ namespace Diagram
         /// <param name="bilingual">Valor inicial de la propiedad Bilingual.</param>
         /// <param name="languages">Valor inicial de la propiedad Languages.</param>
         /// <param name="averageRating">Valor inicial de la propiedad AverageRating.</param>
-        /// <param name="verified">Valor inicial de la propiedad Verified.</param>
+        /// <param name="verified">Valor inicial de la propiedad verified.</param>
         /// <param name="userId">Valor inicial de la propiedad UserId.</param>
-        public static ServiceProvider CreateServiceProvider(global::System.Int32 id, global::System.String idProvide, global::System.String idUser, global::System.String tradeName, global::System.String description, global::System.String address, global::System.String contactTelephone, global::System.String bilingual, global::System.String languages, global::System.String averageRating, global::System.Boolean verified, global::System.Int32 userId)
+        public static ServiceProvider CreateServiceProvider(global::System.Int32 id, global::System.String idProvide, global::System.String idUser, global::System.String tradeName, global::System.String description, global::System.String address, global::System.String contactTelephone, global::System.String bilingual, global::System.String languages, global::System.String averageRating, global::System.String verified, global::System.Int32 userId)
         {
             ServiceProvider serviceProvider = new ServiceProvider();
             serviceProvider.Id = id;
@@ -5159,7 +5185,7 @@ namespace Diagram
             serviceProvider.Bilingual = bilingual;
             serviceProvider.Languages = languages;
             serviceProvider.AverageRating = averageRating;
-            serviceProvider.Verified = verified;
+            serviceProvider.verified = verified;
             serviceProvider.UserId = userId;
             return serviceProvider;
         }
@@ -5416,24 +5442,24 @@ namespace Diagram
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean Verified
+        public global::System.String verified
         {
             get
             {
-                return _Verified;
+                return _verified;
             }
             set
             {
-                OnVerifiedChanging(value);
-                ReportPropertyChanging("Verified");
-                _Verified = StructuralObject.SetValidValue(value, "Verified");
-                ReportPropertyChanged("Verified");
-                OnVerifiedChanged();
+                OnverifiedChanging(value);
+                ReportPropertyChanging("verified");
+                _verified = StructuralObject.SetValidValue(value, false, "verified");
+                ReportPropertyChanged("verified");
+                OnverifiedChanged();
             }
         }
-        private global::System.Boolean _Verified;
-        partial void OnVerifiedChanging(global::System.Boolean value);
-        partial void OnVerifiedChanged();
+        private global::System.String _verified;
+        partial void OnverifiedChanging(global::System.String value);
+        partial void OnverifiedChanged();
     
         /// <summary>
         /// No hay documentación de metadatos disponible.

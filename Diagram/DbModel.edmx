@@ -80,6 +80,68 @@
           <EntitySet Name="notifications" EntityType="DbModel.notification" />
           <EntitySet Name="payments" EntityType="DbModel.payment" />
           <EntitySet Name="blog_tags" EntityType="DbModel.blog_tag" />
+          <AssociationSet Name="ServiceDestinationService" Association="DbModel.ServiceDestinationService">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="DestinationService" EntitySet="DestinationsServices" />
+          </AssociationSet>
+          <EntitySet Name="Destinations" EntityType="DbModel.Destination" />
+          <AssociationSet Name="DestinationDestinationService" Association="DbModel.DestinationDestinationService">
+            <End Role="Destination" EntitySet="Destinations" />
+            <End Role="DestinationService" EntitySet="DestinationsServices" />
+          </AssociationSet>
+          <AssociationSet Name="ServiceAvailability" Association="DbModel.ServiceAvailability">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="Availability" EntitySet="AvailabilitySet" />
+          </AssociationSet>
+          <AssociationSet Name="ServiceProviderService1" Association="DbModel.ServiceProviderService1">
+            <End Role="ServiceProvider" EntitySet="ServicesProviders" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+          <EntitySet Name="Reservations" EntityType="DbModel.Reservation" />
+          <AssociationSet Name="Reservationreservation_detail" Association="DbModel.Reservationreservation_detail">
+            <End Role="Reservation" EntitySet="Reservations" />
+            <End Role="reservation_detail" EntitySet="reservation_details" />
+          </AssociationSet>
+          <AssociationSet Name="UserReservation" Association="DbModel.UserReservation">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="Reservationpayment" Association="DbModel.Reservationpayment">
+            <End Role="Reservation" EntitySet="Reservations" />
+            <End Role="payment" EntitySet="payments" />
+          </AssociationSet>
+          <AssociationSet Name="FavoriteUsernotification" Association="DbModel.FavoriteUsernotification">
+            <End Role="FavoriteUser" EntitySet="FavoritesUsers" />
+            <End Role="notification" EntitySet="notifications" />
+          </AssociationSet>
+          <AssociationSet Name="Usernotification" Association="DbModel.Usernotification">
+            <End Role="User" EntitySet="Users" />
+            <End Role="notification" EntitySet="notifications" />
+          </AssociationSet>
+          <AssociationSet Name="Blogblog_tag" Association="DbModel.Blogblog_tag">
+            <End Role="Blog" EntitySet="BlogSet" />
+            <End Role="blog_tag" EntitySet="blog_tags" />
+          </AssociationSet>
+          <AssociationSet Name="UserBlog" Association="DbModel.UserBlog">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Blog" EntitySet="BlogSet" />
+          </AssociationSet>
+          <AssociationSet Name="Tagblog_tag" Association="DbModel.Tagblog_tag">
+            <End Role="Tag" EntitySet="TagSet" />
+            <End Role="blog_tag" EntitySet="blog_tags" />
+          </AssociationSet>
+          <AssociationSet Name="ServiceReview" Association="DbModel.ServiceReview">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="Review" EntitySet="ReviewSet" />
+          </AssociationSet>
+          <AssociationSet Name="UserReview" Association="DbModel.UserReview">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Review" EntitySet="ReviewSet" />
+          </AssociationSet>
+          <AssociationSet Name="service_categoryService" Association="DbModel.service_categoryService">
+            <End Role="service_category" EntitySet="service_categorys" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Form">
           <Key>
@@ -101,7 +163,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Code" Type="String" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Active" Type="String" Nullable="false" />
           <NavigationProperty Name="FormModule" Relationship="DbModel.ModuleFormModule" FromRole="Module" ToRole="FormModule" />
           <Property Name="DeleteAt" Type="String" Nullable="false" />
           <Property Name="CreateAt" Type="String" Nullable="false" />
@@ -140,6 +202,10 @@
           <Property Name="CreateAt" Type="String" Nullable="false" />
           <NavigationProperty Name="FavoriteUser" Relationship="DbModel.UserFavoriteUser" FromRole="User" ToRole="FavoriteUser" />
           <NavigationProperty Name="ServiceProvider" Relationship="DbModel.UserServiceProvider" FromRole="User" ToRole="ServiceProvider" />
+          <NavigationProperty Name="Reservation" Relationship="DbModel.UserReservation" FromRole="User" ToRole="Reservation" />
+          <NavigationProperty Name="notification" Relationship="DbModel.Usernotification" FromRole="User" ToRole="notification" />
+          <NavigationProperty Name="Blog" Relationship="DbModel.UserBlog" FromRole="User" ToRole="Blog" />
+          <NavigationProperty Name="Review" Relationship="DbModel.UserReview" FromRole="User" ToRole="Review" />
         </EntityType>
         <EntityType Name="RolUser">
           <Key>
@@ -279,6 +345,7 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Service" Relationship="DbModel.ServiceFavoriteUser" FromRole="FavoriteUser" ToRole="Service" />
           <Property Name="ServiceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="notification" Relationship="DbModel.FavoriteUsernotification" FromRole="FavoriteUser" ToRole="notification" />
         </EntityType>
         <EntityType Name="ServiceProvider">
           <Key>
@@ -294,9 +361,10 @@
           <Property Name="Bilingual" Type="String" Nullable="false" />
           <Property Name="Languages" Type="String" Nullable="false" />
           <Property Name="AverageRating" Type="String" Nullable="false" />
-          <Property Name="Verified" Type="Boolean" Nullable="false" />
+          <Property Name="verified" Type="String" Nullable="false" />
           <NavigationProperty Name="User" Relationship="DbModel.UserServiceProvider" FromRole="ServiceProvider" ToRole="User" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Service1" Relationship="DbModel.ServiceProviderService1" FromRole="ServiceProvider" ToRole="Service" />
         </EntityType>
         <Association Name="UserFavoriteUser">
           <End Type="DbModel.User" Role="User" Multiplicity="1" />
@@ -337,8 +405,17 @@
           <Property Name="MaximumCapacity" Type="String" Nullable="false" />
           <Property Name="Available" Type="String" Nullable="false" />
           <Property Name="Requirements" Type="String" Nullable="false" />
-          <Property Name="Includes" Type="Boolean" Nullable="false" />
+          <Property Name="Includes" Type="String" Nullable="false" />
+          <Property Name="NotIncluded" Type="String" Nullable="false" />
           <NavigationProperty Name="FavoriteUser" Relationship="DbModel.ServiceFavoriteUser" FromRole="Service" ToRole="FavoriteUser" />
+          <Property Name="ServiceProviderId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DestinationService" Relationship="DbModel.ServiceDestinationService" FromRole="Service" ToRole="DestinationService" />
+          <NavigationProperty Name="Availability" Relationship="DbModel.ServiceAvailability" FromRole="Service" ToRole="Availability" />
+          <NavigationProperty Name="ServiceProvider1" Relationship="DbModel.ServiceProviderService1" FromRole="Service" ToRole="ServiceProvider" />
+          <Property Name="ServiceProviderId1" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Review" Relationship="DbModel.ServiceReview" FromRole="Service" ToRole="Review" />
+          <NavigationProperty Name="service_category" Relationship="DbModel.service_categoryService" FromRole="Service" ToRole="service_category" />
+          <Property Name="service_categoryId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="ServiceFavoriteUser">
           <End Type="DbModel.Service" Role="Service" Multiplicity="1" />
@@ -358,6 +435,10 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Property1" Type="String" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="DbModel.ServiceDestinationService" FromRole="DestinationService" ToRole="Service" />
+          <Property Name="ServiceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Destination" Relationship="DbModel.DestinationDestinationService" FromRole="DestinationService" ToRole="Destination" />
+          <Property Name="DestinationId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Imagen">
           <Key>
@@ -384,6 +465,8 @@
           <Property Name="service_time" Type="String" Nullable="false" />
           <Property Name="number_of_people" Type="String" Nullable="false" />
           <Property Name="subtotal" Type="String" Nullable="false" />
+          <NavigationProperty Name="Reservation" Relationship="DbModel.Reservationreservation_detail" FromRole="reservation_detail" ToRole="Reservation" />
+          <Property Name="ReservationId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -392,6 +475,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_tag" Type="String" Nullable="false" />
           <Property Name="name" Type="String" Nullable="false" />
+          <NavigationProperty Name="blog_tag" Relationship="DbModel.Tagblog_tag" FromRole="Tag" ToRole="blog_tag" />
         </EntityType>
         <EntityType Name="service_category">
           <Key>
@@ -402,6 +486,7 @@
           <Property Name="name" Type="String" Nullable="false" />
           <Property Name="description" Type="String" Nullable="false" />
           <Property Name="icon" Type="String" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="DbModel.service_categoryService" FromRole="service_category" ToRole="Service" />
         </EntityType>
         <EntityType Name="Availability">
           <Key>
@@ -413,7 +498,9 @@
           <Property Name="date" Type="String" Nullable="false" />
           <Property Name="start_time" Type="String" Nullable="false" />
           <Property Name="end_time" Type="String" Nullable="false" />
-          <Property Name="available" Type="Boolean" Nullable="false" />
+          <Property Name="available" Type="String" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="DbModel.ServiceAvailability" FromRole="Availability" ToRole="Service" />
+          <Property Name="ServiceId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Review">
           <Key>
@@ -426,7 +513,11 @@
           <Property Name="rating" Type="String" Nullable="false" />
           <Property Name="comment" Type="String" Nullable="false" />
           <Property Name="review_date" Type="String" Nullable="false" />
-          <Property Name="approved" Type="Boolean" Nullable="false" />
+          <Property Name="approved" Type="String" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="DbModel.ServiceReview" FromRole="Review" ToRole="Service" />
+          <Property Name="ServiceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="DbModel.UserReview" FromRole="Review" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Blog">
           <Key>
@@ -439,8 +530,11 @@
           <Property Name="content" Type="String" Nullable="false" />
           <Property Name="publish_date" Type="String" Nullable="false" />
           <Property Name="featured_image" Type="String" Nullable="false" />
-          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="active" Type="String" Nullable="false" />
           <Property Name="views" Type="String" Nullable="false" />
+          <NavigationProperty Name="blog_tag" Relationship="DbModel.Blogblog_tag" FromRole="Blog" ToRole="blog_tag" />
+          <NavigationProperty Name="User" Relationship="DbModel.UserBlog" FromRole="Blog" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="notification">
           <Key>
@@ -454,6 +548,10 @@
           <Property Name="creation_date" Type="String" Nullable="false" />
           <Property Name="read" Type="String" Nullable="false" />
           <Property Name="notification_type" Type="String" Nullable="false" />
+          <NavigationProperty Name="FavoriteUser" Relationship="DbModel.FavoriteUsernotification" FromRole="notification" ToRole="FavoriteUser" />
+          <Property Name="FavoriteUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="DbModel.Usernotification" FromRole="notification" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="payment">
           <Key>
@@ -467,6 +565,8 @@
           <Property Name="payment_method" Type="String" Nullable="false" />
           <Property Name="payment_reference" Type="String" Nullable="false" />
           <Property Name="payment_status" Type="String" Nullable="false" />
+          <NavigationProperty Name="Reservation" Relationship="DbModel.Reservationpayment" FromRole="payment" ToRole="Reservation" />
+          <Property Name="ReservationId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="blog_tag">
           <Key>
@@ -475,7 +575,225 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_blog" Type="String" Nullable="false" />
           <Property Name="id_tag" Type="String" Nullable="false" />
+          <NavigationProperty Name="Blog" Relationship="DbModel.Blogblog_tag" FromRole="blog_tag" ToRole="Blog" />
+          <Property Name="BlogId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tag" Relationship="DbModel.Tagblog_tag" FromRole="blog_tag" ToRole="Tag" />
+          <Property Name="TagId" Type="Int32" Nullable="false" />
         </EntityType>
+        <Association Name="ServiceDestinationService">
+          <End Type="DbModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="DbModel.DestinationService" Role="DestinationService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DestinationService">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Destination">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDestination" Type="String" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Latitude" Type="String" Nullable="false" />
+          <Property Name="Length" Type="String" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <Property Name="OpeningHours" Type="String" Nullable="false" />
+          <Property Name="Recommendations" Type="String" Nullable="false" />
+          <Property Name="Climate" Type="String" Nullable="false" />
+          <Property Name="IdealSeason" Type="String" Nullable="false" />
+          <Property Name="MainImage" Type="String" Nullable="false" />
+          <NavigationProperty Name="DestinationService" Relationship="DbModel.DestinationDestinationService" FromRole="Destination" ToRole="DestinationService" />
+        </EntityType>
+        <Association Name="DestinationDestinationService">
+          <End Type="DbModel.Destination" Role="Destination" Multiplicity="1" />
+          <End Type="DbModel.DestinationService" Role="DestinationService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Destination">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DestinationService">
+              <PropertyRef Name="DestinationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ServiceAvailability">
+          <End Type="DbModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="DbModel.Availability" Role="Availability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Availability">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ServiceProviderService1">
+          <End Type="DbModel.ServiceProvider" Role="ServiceProvider" Multiplicity="1" />
+          <End Type="DbModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="ServiceProviderId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdReservartion" Type="String" Nullable="false" />
+          <Property Name="IdUser" Type="String" Nullable="false" />
+          <Property Name="ReservationDate" Type="String" Nullable="false" />
+          <Property Name="State" Type="String" Nullable="false" />
+          <Property Name="total" Type="String" Nullable="false" />
+          <Property Name="SpecialNotes" Type="String" Nullable="false" />
+          <NavigationProperty Name="reservation_detail" Relationship="DbModel.Reservationreservation_detail" FromRole="Reservation" ToRole="reservation_detail" />
+          <NavigationProperty Name="User" Relationship="DbModel.UserReservation" FromRole="Reservation" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="payment" Relationship="DbModel.Reservationpayment" FromRole="Reservation" ToRole="payment" />
+        </EntityType>
+        <Association Name="Reservationreservation_detail">
+          <End Type="DbModel.Reservation" Role="Reservation" Multiplicity="1" />
+          <End Type="DbModel.reservation_detail" Role="reservation_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="reservation_detail">
+              <PropertyRef Name="ReservationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserReservation">
+          <End Type="DbModel.User" Role="User" Multiplicity="1" />
+          <End Type="DbModel.Reservation" Role="Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reservationpayment">
+          <End Type="DbModel.Reservation" Role="Reservation" Multiplicity="1" />
+          <End Type="DbModel.payment" Role="payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="payment">
+              <PropertyRef Name="ReservationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FavoriteUsernotification">
+          <End Type="DbModel.FavoriteUser" Role="FavoriteUser" Multiplicity="1" />
+          <End Type="DbModel.notification" Role="notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FavoriteUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="notification">
+              <PropertyRef Name="FavoriteUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Usernotification">
+          <End Type="DbModel.User" Role="User" Multiplicity="1" />
+          <End Type="DbModel.notification" Role="notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="notification">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Blogblog_tag">
+          <End Type="DbModel.Blog" Role="Blog" Multiplicity="1" />
+          <End Type="DbModel.blog_tag" Role="blog_tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Blog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="blog_tag">
+              <PropertyRef Name="BlogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserBlog">
+          <End Type="DbModel.User" Role="User" Multiplicity="1" />
+          <End Type="DbModel.Blog" Role="Blog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Blog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tagblog_tag">
+          <End Type="DbModel.Tag" Role="Tag" Multiplicity="1" />
+          <End Type="DbModel.blog_tag" Role="blog_tag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="blog_tag">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ServiceReview">
+          <End Type="DbModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="DbModel.Review" Role="Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserReview">
+          <End Type="DbModel.User" Role="User" Multiplicity="1" />
+          <End Type="DbModel.Review" Role="Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="service_categoryService">
+          <End Type="DbModel.service_category" Role="service_category" Multiplicity="1" />
+          <End Type="DbModel.Service" Role="Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="service_category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="service_categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

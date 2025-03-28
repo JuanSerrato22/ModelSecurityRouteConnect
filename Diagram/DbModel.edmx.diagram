@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5cf0a4d9daa64ace9e3f64ead24be0f1" Name="Diagram1" ZoomLevel="76" >
-        <EntityTypeShape EntityType="DbModel.Form" Width="1.5" PointX="8.25" PointY="7" />
+      <Diagram DiagramId="5cf0a4d9daa64ace9e3f64ead24be0f1" Name="Diagram1" ZoomLevel="47" >
+        <EntityTypeShape EntityType="DbModel.Form" Width="1.5" PointX="10.5" PointY="13" />
         <EntityTypeShape EntityType="DbModel.Module" Width="1.5" PointX="3.375" PointY="7" />
         <EntityTypeShape EntityType="DbModel.FormModule" Width="1.5" PointX="5.5" PointY="7" />
         <AssociationConnector Association="DbModel.FormModuleForm" />
@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="DbModel.RolUser" Width="1.5" PointX="4.375" PointY="2.125" />
         <EntityTypeShape EntityType="DbModel.Rol" Width="1.5" PointX="6.875" PointY="2.25" />
         <EntityTypeShape EntityType="DbModel.RolFormPermission" Width="1.5" PointX="10.625" PointY="4.125" />
-        <EntityTypeShape EntityType="DbModel.Permission" Width="1.5" PointX="14.125" PointY="4.5" />
+        <EntityTypeShape EntityType="DbModel.Permission" Width="1.5" PointX="13.5" PointY="4.5" />
         <EntityTypeShape EntityType="DbModel.ChangeLog" Width="1.5" PointX="0.5" PointY="6.125" FillColor="255, 192, 192" />
         <AssociationConnector Association="DbModel.UserRolUser" />
         <AssociationConnector Association="DbModel.RolUserRol" />
@@ -22,23 +22,40 @@
         <AssociationConnector Association="DbModel.FormRolFormPermission" />
         <AssociationConnector Association="DbModel.RolFormPermissionPermission" />
         <AssociationConnector Association="DbModel.UserChangeLog" />
-        <EntityTypeShape EntityType="DbModel.FavoriteUser" Width="1.5" PointX="14.25" PointY="0.75" />
-        <EntityTypeShape EntityType="DbModel.ServiceProvider" Width="1.5" PointX="16.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DbModel.FavoriteUser" Width="1.5" PointX="16.25" PointY="0.75" />
+        <EntityTypeShape EntityType="DbModel.ServiceProvider" Width="1.5" PointX="19.625" PointY="3" />
         <AssociationConnector Association="DbModel.UserFavoriteUser" />
         <AssociationConnector Association="DbModel.UserServiceProvider" />
-        <EntityTypeShape EntityType="DbModel.Service" Width="1.5" PointX="19" PointY="0.75" />
+        <EntityTypeShape EntityType="DbModel.Service" Width="1.5" PointX="24.5" PointY="4.875" IsExpanded="true" />
         <AssociationConnector Association="DbModel.ServiceFavoriteUser" />
-        <EntityTypeShape EntityType="DbModel.DestinationService" Width="1.5" PointX="21.375" PointY="1" />
-        <EntityTypeShape EntityType="DbModel.Imagen" Width="1.5" PointX="19.375" PointY="5.5" />
-        <EntityTypeShape EntityType="DbModel.reservation_detail" Width="1.875" PointX="16.875" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbModel.Tag" Width="1.5" PointX="14.375" PointY="6.875" />
-        <EntityTypeShape EntityType="DbModel.service_category" Width="1.5" PointX="12.125" PointY="7.125" />
-        <EntityTypeShape EntityType="DbModel.Availability" Width="1.5" PointX="14.625" PointY="9" />
-        <EntityTypeShape EntityType="DbModel.Review" Width="1.5" PointX="19.375" PointY="9.125" />
-        <EntityTypeShape EntityType="DbModel.Blog" Width="1.5" PointX="12" PointY="9.875" />
-        <EntityTypeShape EntityType="DbModel.notification" Width="1.5" PointX="9.5" PointY="10" />
-        <EntityTypeShape EntityType="DbModel.payment" Width="1.75" PointX="7" PointY="10.5" />
-        <EntityTypeShape EntityType="DbModel.blog_tag" Width="1.5" PointX="4.25" PointY="10.875" />
+        <EntityTypeShape EntityType="DbModel.DestinationService" Width="1.5" PointX="28.25" PointY="0.875" />
+        <EntityTypeShape EntityType="DbModel.Imagen" Width="1.5" PointX="34.375" PointY="7.5" />
+        <EntityTypeShape EntityType="DbModel.reservation_detail" Width="1.875" PointX="38.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbModel.Tag" Width="1.5" PointX="16.125" PointY="15.125" />
+        <EntityTypeShape EntityType="DbModel.service_category" Width="1.5" PointX="29.75" PointY="10.5" />
+        <EntityTypeShape EntityType="DbModel.Availability" Width="1.5" PointX="28.5" PointY="14.25" />
+        <EntityTypeShape EntityType="DbModel.Review" Width="1.5" PointX="18.625" PointY="23.125" />
+        <EntityTypeShape EntityType="DbModel.Blog" Width="1.5" PointX="7.625" PointY="14.125" />
+        <EntityTypeShape EntityType="DbModel.notification" Width="1.5" PointX="8.25" PointY="9.375" />
+        <EntityTypeShape EntityType="DbModel.payment" Width="1.75" PointX="38.125" PointY="17" />
+        <EntityTypeShape EntityType="DbModel.blog_tag" Width="1.5" PointX="5.375" PointY="17.75" />
+        <AssociationConnector Association="DbModel.ServiceDestinationService" />
+        <EntityTypeShape EntityType="DbModel.Destination" Width="1.5" PointX="31.875" PointY="1.25" />
+        <AssociationConnector Association="DbModel.DestinationDestinationService" />
+        <AssociationConnector Association="DbModel.ServiceAvailability" />
+        <AssociationConnector Association="DbModel.ServiceProviderService1" />
+        <EntityTypeShape EntityType="DbModel.Reservation" Width="1.5" PointX="34.125" PointY="19.75" />
+        <AssociationConnector Association="DbModel.Reservationreservation_detail" />
+        <AssociationConnector Association="DbModel.UserReservation" />
+        <AssociationConnector Association="DbModel.Reservationpayment" />
+        <AssociationConnector Association="DbModel.FavoriteUsernotification" />
+        <AssociationConnector Association="DbModel.Usernotification" />
+        <AssociationConnector Association="DbModel.Blogblog_tag" />
+        <AssociationConnector Association="DbModel.UserBlog" />
+        <AssociationConnector Association="DbModel.Tagblog_tag" />
+        <AssociationConnector Association="DbModel.ServiceReview" />
+        <AssociationConnector Association="DbModel.UserReview" />
+        <AssociationConnector Association="DbModel.service_categoryService" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
