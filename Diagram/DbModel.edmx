@@ -4,262 +4,251 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="DbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
-        <EntityContainer Name="DbModelTargetContainer" >
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="Model1TargetContainer" >
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
-        <EntityContainer Name="DbModelContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Forms" EntityType="DbModel.Form" />
-          <EntitySet Name="Modules" EntityType="DbModel.Module" />
-          <EntitySet Name="FormsModules" EntityType="DbModel.FormModule" />
-          <AssociationSet Name="FormModuleForm" Association="DbModel.FormModuleForm">
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="Model1.User" />
+          <EntitySet Name="Rols" EntityType="Model1.Rol" />
+          <EntitySet Name="UsersRols" EntityType="Model1.UserRol" />
+          <EntitySet Name="Persons" EntityType="Model1.Person" />
+          <EntitySet Name="Permissions" EntityType="Model1.Permission" />
+          <EntitySet Name="RolsPermissions" EntityType="Model1.RolPermission" />
+          <EntitySet Name="Destinations" EntityType="Model1.Destination" />
+          <EntitySet Name="Activitys" EntityType="Model1.Activity" />
+          <EntitySet Name="Forms" EntityType="Model1.Form" />
+          <EntitySet Name="Modules" EntityType="Model1.Module" />
+          <EntitySet Name="FormsModules" EntityType="Model1.FormModule" />
+          <EntitySet Name="Payments" EntityType="Model1.Payment" />
+          <EntitySet Name="RolsFormsPermissions" EntityType="Model1.RolFormPermission" />
+          <EntitySet Name="ChangesLogs" EntityType="Model1.ChangeLog" />
+          <AssociationSet Name="UserRolUser" Association="Model1.UserRolUser">
+            <End Role="UserRol" EntitySet="UsersRols" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FormModuleForm" Association="Model1.FormModuleForm">
             <End Role="FormModule" EntitySet="FormsModules" />
             <End Role="Form" EntitySet="Forms" />
           </AssociationSet>
-          <AssociationSet Name="ModuleFormModule" Association="DbModel.ModuleFormModule">
+          <AssociationSet Name="PersonUser" Association="Model1.PersonUser">
+            <End Role="Person" EntitySet="Persons" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="UserRolRol" Association="Model1.UserRolRol">
+            <End Role="UserRol" EntitySet="UsersRols" />
+            <End Role="Rol" EntitySet="Rols" />
+          </AssociationSet>
+          <AssociationSet Name="RolPermissionRol" Association="Model1.RolPermissionRol">
+            <End Role="RolPermission" EntitySet="RolsPermissions" />
+            <End Role="Rol" EntitySet="Rols" />
+          </AssociationSet>
+          <AssociationSet Name="RolPermissionPermission" Association="Model1.RolPermissionPermission">
+            <End Role="RolPermission" EntitySet="RolsPermissions" />
+            <End Role="Permission" EntitySet="Permissions" />
+          </AssociationSet>
+          <EntitySet Name="UsersActivitys" EntityType="Model1.UserActivity" />
+          <AssociationSet Name="UserActivityUser" Association="Model1.UserActivityUser">
+            <End Role="UserActivity" EntitySet="UsersActivitys" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="UserActivityActivity" Association="Model1.UserActivityActivity">
+            <End Role="UserActivity" EntitySet="UsersActivitys" />
+            <End Role="Activity" EntitySet="Activitys" />
+          </AssociationSet>
+          <AssociationSet Name="FormModuleModule" Association="Model1.FormModuleModule">
             <End Role="FormModule" EntitySet="FormsModules" />
             <End Role="Module" EntitySet="Modules" />
           </AssociationSet>
-          <EntitySet Name="Users" EntityType="DbModel.User" />
-          <EntitySet Name="RolsUsers" EntityType="DbModel.RolUser" />
-          <EntitySet Name="Rols" EntityType="DbModel.Rol" />
-          <EntitySet Name="RolsFormsPermissions" EntityType="DbModel.RolFormPermission" />
-          <EntitySet Name="Permissions" EntityType="DbModel.Permission" />
-          <EntitySet Name="ChangesLogs" EntityType="DbModel.ChangeLog" />
-          <AssociationSet Name="UserRolUser" Association="DbModel.UserRolUser">
-            <End Role="User" EntitySet="Users" />
-            <End Role="RolUser" EntitySet="RolsUsers" />
-          </AssociationSet>
-          <AssociationSet Name="RolUserRol" Association="DbModel.RolUserRol">
-            <End Role="RolUser" EntitySet="RolsUsers" />
-            <End Role="Rol" EntitySet="Rols" />
-          </AssociationSet>
-          <AssociationSet Name="RolRolFormPermission" Association="DbModel.RolRolFormPermission">
-            <End Role="Rol" EntitySet="Rols" />
+          <AssociationSet Name="RolFormPermissionRol" Association="Model1.RolFormPermissionRol">
             <End Role="RolFormPermission" EntitySet="RolsFormsPermissions" />
+            <End Role="Rol" EntitySet="Rols" />
           </AssociationSet>
-          <AssociationSet Name="FormRolFormPermission" Association="DbModel.FormRolFormPermission">
+          <AssociationSet Name="RolFormPermissionForm" Association="Model1.RolFormPermissionForm">
+            <End Role="RolFormPermission" EntitySet="RolsFormsPermissions" />
             <End Role="Form" EntitySet="Forms" />
-            <End Role="RolFormPermission" EntitySet="RolsFormsPermissions" />
           </AssociationSet>
-          <AssociationSet Name="RolFormPermissionPermission" Association="DbModel.RolFormPermissionPermission">
+          <AssociationSet Name="RolFormPermissionPermission" Association="Model1.RolFormPermissionPermission">
             <End Role="RolFormPermission" EntitySet="RolsFormsPermissions" />
             <End Role="Permission" EntitySet="Permissions" />
           </AssociationSet>
-          <AssociationSet Name="UserChangeLog" Association="DbModel.UserChangeLog">
-            <End Role="User" EntitySet="Users" />
-            <End Role="ChangeLog" EntitySet="ChangesLogs" />
-          </AssociationSet>
-          <EntitySet Name="FavoritesUsers" EntityType="DbModel.FavoriteUser" />
-          <EntitySet Name="ServicesProviders" EntityType="DbModel.ServiceProvider" />
-          <AssociationSet Name="UserFavoriteUser" Association="DbModel.UserFavoriteUser">
-            <End Role="User" EntitySet="Users" />
-            <End Role="FavoriteUser" EntitySet="FavoritesUsers" />
-          </AssociationSet>
-          <AssociationSet Name="UserServiceProvider" Association="DbModel.UserServiceProvider">
-            <End Role="User" EntitySet="Users" />
-            <End Role="ServiceProvider" EntitySet="ServicesProviders" />
-          </AssociationSet>
-          <EntitySet Name="Services" EntityType="DbModel.Service" />
-          <AssociationSet Name="ServiceFavoriteUser" Association="DbModel.ServiceFavoriteUser">
-            <End Role="Service" EntitySet="Services" />
-            <End Role="FavoriteUser" EntitySet="FavoritesUsers" />
-          </AssociationSet>
-          <EntitySet Name="DestinationsServices" EntityType="DbModel.DestinationService" />
-          <EntitySet Name="Imagens" EntityType="DbModel.Imagen" />
-          <EntitySet Name="reservation_details" EntityType="DbModel.reservation_detail" />
-          <EntitySet Name="TagSet" EntityType="DbModel.Tag" />
-          <EntitySet Name="service_categorys" EntityType="DbModel.service_category" />
-          <EntitySet Name="AvailabilitySet" EntityType="DbModel.Availability" />
-          <EntitySet Name="ReviewSet" EntityType="DbModel.Review" />
-          <EntitySet Name="BlogSet" EntityType="DbModel.Blog" />
-          <EntitySet Name="notifications" EntityType="DbModel.notification" />
-          <EntitySet Name="payments" EntityType="DbModel.payment" />
-          <EntitySet Name="blog_tags" EntityType="DbModel.blog_tag" />
-          <AssociationSet Name="ServiceDestinationService" Association="DbModel.ServiceDestinationService">
-            <End Role="Service" EntitySet="Services" />
-            <End Role="DestinationService" EntitySet="DestinationsServices" />
-          </AssociationSet>
-          <EntitySet Name="Destinations" EntityType="DbModel.Destination" />
-          <AssociationSet Name="DestinationDestinationService" Association="DbModel.DestinationDestinationService">
+          <EntitySet Name="DestinationsActivitys" EntityType="Model1.DestinationActivity" />
+          <AssociationSet Name="DestinationActivityDestination" Association="Model1.DestinationActivityDestination">
+            <End Role="DestinationActivity" EntitySet="DestinationsActivitys" />
             <End Role="Destination" EntitySet="Destinations" />
-            <End Role="DestinationService" EntitySet="DestinationsServices" />
           </AssociationSet>
-          <AssociationSet Name="ServiceAvailability" Association="DbModel.ServiceAvailability">
-            <End Role="Service" EntitySet="Services" />
-            <End Role="Availability" EntitySet="AvailabilitySet" />
+          <AssociationSet Name="DestinationActivityActivity" Association="Model1.DestinationActivityActivity">
+            <End Role="DestinationActivity" EntitySet="DestinationsActivitys" />
+            <End Role="Activity" EntitySet="Activitys" />
           </AssociationSet>
-          <AssociationSet Name="ServiceProviderService1" Association="DbModel.ServiceProviderService1">
-            <End Role="ServiceProvider" EntitySet="ServicesProviders" />
-            <End Role="Service" EntitySet="Services" />
+          <AssociationSet Name="UserActivityPayment" Association="Model1.UserActivityPayment">
+            <End Role="UserActivity" EntitySet="UsersActivitys" />
+            <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
-          <EntitySet Name="Reservations" EntityType="DbModel.Reservation" />
-          <AssociationSet Name="Reservationreservation_detail" Association="DbModel.Reservationreservation_detail">
-            <End Role="Reservation" EntitySet="Reservations" />
-            <End Role="reservation_detail" EntitySet="reservation_details" />
-          </AssociationSet>
-          <AssociationSet Name="UserReservation" Association="DbModel.UserReservation">
+          <AssociationSet Name="UserPayment" Association="Model1.UserPayment">
             <End Role="User" EntitySet="Users" />
-            <End Role="Reservation" EntitySet="Reservations" />
-          </AssociationSet>
-          <AssociationSet Name="Reservationpayment" Association="DbModel.Reservationpayment">
-            <End Role="Reservation" EntitySet="Reservations" />
-            <End Role="payment" EntitySet="payments" />
-          </AssociationSet>
-          <AssociationSet Name="FavoriteUsernotification" Association="DbModel.FavoriteUsernotification">
-            <End Role="FavoriteUser" EntitySet="FavoritesUsers" />
-            <End Role="notification" EntitySet="notifications" />
-          </AssociationSet>
-          <AssociationSet Name="Usernotification" Association="DbModel.Usernotification">
-            <End Role="User" EntitySet="Users" />
-            <End Role="notification" EntitySet="notifications" />
-          </AssociationSet>
-          <AssociationSet Name="Blogblog_tag" Association="DbModel.Blogblog_tag">
-            <End Role="Blog" EntitySet="BlogSet" />
-            <End Role="blog_tag" EntitySet="blog_tags" />
-          </AssociationSet>
-          <AssociationSet Name="UserBlog" Association="DbModel.UserBlog">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Blog" EntitySet="BlogSet" />
-          </AssociationSet>
-          <AssociationSet Name="Tagblog_tag" Association="DbModel.Tagblog_tag">
-            <End Role="Tag" EntitySet="TagSet" />
-            <End Role="blog_tag" EntitySet="blog_tags" />
-          </AssociationSet>
-          <AssociationSet Name="ServiceReview" Association="DbModel.ServiceReview">
-            <End Role="Service" EntitySet="Services" />
-            <End Role="Review" EntitySet="ReviewSet" />
-          </AssociationSet>
-          <AssociationSet Name="UserReview" Association="DbModel.UserReview">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Review" EntitySet="ReviewSet" />
-          </AssociationSet>
-          <AssociationSet Name="service_categoryService" Association="DbModel.service_categoryService">
-            <End Role="service_category" EntitySet="service_categorys" />
-            <End Role="Service" EntitySet="Services" />
+            <End Role="Payment" EntitySet="Payments" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Form">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="Time" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="FormModule" Relationship="DbModel.FormModuleForm" FromRole="Form" ToRole="FormModule" />
-          <NavigationProperty Name="RolFormPermission" Relationship="DbModel.FormRolFormPermission" FromRole="Form" ToRole="RolFormPermission" />
-          <Property Name="DeleteAt" Type="String" Nullable="false" />
-          <Property Name="CreateAt" Type="String" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Module">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="String" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Active" Type="String" Nullable="false" />
-          <NavigationProperty Name="FormModule" Relationship="DbModel.ModuleFormModule" FromRole="Module" ToRole="FormModule" />
-          <Property Name="DeleteAt" Type="String" Nullable="false" />
-          <Property Name="CreateAt" Type="String" Nullable="false" />
-        </EntityType>
-        <EntityType Name="FormModule">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="FormId" Relationship="DbModel.FormModuleForm" FromRole="FormModule" ToRole="Form" />
-          <NavigationProperty Name="Module" Relationship="DbModel.ModuleFormModule" FromRole="FormModule" ToRole="Module" />
-          <Property Name="DeleteAt" Type="String" Nullable="false" />
-          <Property Name="CreateAt" Type="String" Nullable="false" />
-        </EntityType>
-        <Association Name="FormModuleForm">
-          <End Type="DbModel.FormModule" Role="FormModule" Multiplicity="*" />
-          <End Type="DbModel.Form" Role="Form" Multiplicity="1" />
-        </Association>
-        <Association Name="ModuleFormModule">
-          <End Type="DbModel.FormModule" Role="FormModule" Multiplicity="*" />
-          <End Type="DbModel.Module" Role="Module" Multiplicity="1" />
-        </Association>
         <EntityType Name="User">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="RolUser" Relationship="DbModel.UserRolUser" FromRole="User" ToRole="RolUser" />
-          <NavigationProperty Name="ChangeLog" Relationship="DbModel.UserChangeLog" FromRole="User" ToRole="ChangeLog" />
-          <Property Name="UserName" Type="String" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" />
           <Property Name="Email" Type="String" Nullable="false" />
-          <Property Name="Password" Type="String" Nullable="false" />
-          <Property Name="CreatedAt" Type="String" Nullable="false" />
-          <Property Name="OnUpdateAt" Type="String" Nullable="false" />
+          <Property Name="RegistrationDate" Type="DateTime" Nullable="false" />
           <Property Name="DeleteAt" Type="String" Nullable="false" />
           <Property Name="CreateAt" Type="String" Nullable="false" />
-          <NavigationProperty Name="FavoriteUser" Relationship="DbModel.UserFavoriteUser" FromRole="User" ToRole="FavoriteUser" />
-          <NavigationProperty Name="ServiceProvider" Relationship="DbModel.UserServiceProvider" FromRole="User" ToRole="ServiceProvider" />
-          <NavigationProperty Name="Reservation" Relationship="DbModel.UserReservation" FromRole="User" ToRole="Reservation" />
-          <NavigationProperty Name="notification" Relationship="DbModel.Usernotification" FromRole="User" ToRole="notification" />
-          <NavigationProperty Name="Blog" Relationship="DbModel.UserBlog" FromRole="User" ToRole="Blog" />
-          <NavigationProperty Name="Review" Relationship="DbModel.UserReview" FromRole="User" ToRole="Review" />
-        </EntityType>
-        <EntityType Name="RolUser">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="User" Relationship="DbModel.UserRolUser" FromRole="RolUser" ToRole="User" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Rol" Relationship="DbModel.RolUserRol" FromRole="RolUser" ToRole="Rol" />
-          <Property Name="DeleteAt" Type="String" Nullable="false" />
-          <Property Name="CreateAt" Type="String" Nullable="false" />
+          <NavigationProperty Name="UserRol" Relationship="Model1.UserRolUser" FromRole="User" ToRole="UserRol" />
+          <NavigationProperty Name="PersonId" Relationship="Model1.PersonUser" FromRole="User" ToRole="Person" />
+          <NavigationProperty Name="UserActivity" Relationship="Model1.UserActivityUser" FromRole="User" ToRole="UserActivity" />
+          <NavigationProperty Name="PaymentId0" Relationship="Model1.UserPayment" FromRole="User" ToRole="Payment" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="RolId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="RolUser" Relationship="DbModel.RolUserRol" FromRole="Rol" ToRole="RolUser" />
-          <Property Name="RolUserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="RolFormPermission" Relationship="DbModel.RolRolFormPermission" FromRole="Rol" ToRole="RolFormPermission" />
-          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="RolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RolName" Type="String" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" />
-          <Property Name="DeleteAt" Type="String" Nullable="false" />
-          <Property Name="CreateAt" Type="String" Nullable="false" />
+          <NavigationProperty Name="UserRol" Relationship="Model1.UserRolRol" FromRole="Rol" ToRole="UserRol" />
+          <NavigationProperty Name="RolPermission" Relationship="Model1.RolPermissionRol" FromRole="Rol" ToRole="RolPermission" />
+          <NavigationProperty Name="RolFormPermission" Relationship="Model1.RolFormPermissionRol" FromRole="Rol" ToRole="RolFormPermission" />
         </EntityType>
-        <EntityType Name="RolFormPermission">
+        <EntityType Name="UserRol">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="UserRolId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Rol" Relationship="DbModel.RolRolFormPermission" FromRole="RolFormPermission" ToRole="Rol" />
-          <Property Name="RolId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Form" Relationship="DbModel.FormRolFormPermission" FromRole="RolFormPermission" ToRole="Form" />
-          <Property Name="FormId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Permission" Relationship="DbModel.RolFormPermissionPermission" FromRole="RolFormPermission" ToRole="Permission" />
+          <Property Name="UserRolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DeleteAt" Type="String" Nullable="false" />
           <Property Name="CreateAt" Type="String" Nullable="false" />
+          <NavigationProperty Name="UserId" Relationship="Model1.UserRolUser" FromRole="UserRol" ToRole="User" />
+          <NavigationProperty Name="RolId" Relationship="Model1.UserRolRol" FromRole="UserRol" ToRole="Rol" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" />
+          <Property Name="LastName" Type="String" Nullable="false" />
+          <Property Name="Document" Type="String" Nullable="false" />
+          <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Model1.PersonUser" FromRole="Person" ToRole="User" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="PermissionId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="RolFormPermission" Relationship="DbModel.RolFormPermissionPermission" FromRole="Permission" ToRole="RolFormPermission" />
+          <Property Name="PermissionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PermissionName" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="RolPermission" Relationship="Model1.RolPermissionPermission" FromRole="Permission" ToRole="RolPermission" />
+          <NavigationProperty Name="RolFormPermission" Relationship="Model1.RolFormPermissionPermission" FromRole="Permission" ToRole="RolFormPermission" />
+        </EntityType>
+        <EntityType Name="RolPermission">
+          <Key>
+            <PropertyRef Name="RolPernissionId" />
+          </Key>
+          <Property Name="RolPernissionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="RolId" Relationship="Model1.RolPermissionRol" FromRole="RolPermission" ToRole="Rol" />
+          <NavigationProperty Name="PermissionId" Relationship="Model1.RolPermissionPermission" FromRole="RolPermission" ToRole="Permission" />
+        </EntityType>
+        <EntityType Name="Destination">
+          <Key>
+            <PropertyRef Name="DestinationId" />
+          </Key>
+          <Property Name="DestinationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Region" Type="String" Nullable="false" />
+          <Property Name="Latitude" Type="Decimal" Nullable="false" />
+          <Property Name="Longitude" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="DestinationActivity" Relationship="Model1.DestinationActivityDestination" FromRole="Destination" ToRole="DestinationActivity" />
+        </EntityType>
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Category" Type="String" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" />
+          <Property Name="DurationHours" Type="Time" Nullable="false" />
+          <Property Name="Available" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UserActivity" Relationship="Model1.UserActivityActivity" FromRole="Activity" ToRole="UserActivity" />
+          <NavigationProperty Name="DestinationActivity" Relationship="Model1.DestinationActivityActivity" FromRole="Activity" ToRole="DestinationActivity" />
+        </EntityType>
+        <EntityType Name="Form">
+          <Key>
+            <PropertyRef Name="FormId" />
+          </Key>
+          <Property Name="FormId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
           <Property Name="DeleteAt" Type="String" Nullable="false" />
           <Property Name="CreateAt" Type="String" Nullable="false" />
+          <NavigationProperty Name="FormModule" Relationship="Model1.FormModuleForm" FromRole="Form" ToRole="FormModule" />
+          <NavigationProperty Name="RolFormPermission" Relationship="Model1.RolFormPermissionForm" FromRole="Form" ToRole="RolFormPermission" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ModuleId" />
+          </Key>
+          <Property Name="ModuleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteAt" Type="String" Nullable="false" />
+          <Property Name="CreateAt" Type="String" Nullable="false" />
+          <NavigationProperty Name="FormModule" Relationship="Model1.FormModuleModule" FromRole="Module" ToRole="FormModule" />
+        </EntityType>
+        <EntityType Name="FormModule">
+          <Key>
+            <PropertyRef Name="FormModulesId" />
+          </Key>
+          <Property Name="FormModulesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeleteAt" Type="String" Nullable="false" />
+          <Property Name="CreateAt" Type="String" Nullable="false" />
+          <NavigationProperty Name="FormId" Relationship="Model1.FormModuleForm" FromRole="FormModule" ToRole="Form" />
+          <NavigationProperty Name="ModuleId" Relationship="Model1.FormModuleModule" FromRole="FormModule" ToRole="Module" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentId" />
+          </Key>
+          <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentMethod" Type="String" Nullable="false" />
+          <Property Name="Amount" Type="String" Nullable="false" />
+          <Property Name="Activity" Type="String" Nullable="false" />
+          <Property Name="PaymentDate" Type="String" Nullable="false" />
+          <NavigationProperty Name="UserActivityId" Relationship="Model1.UserActivityPayment" FromRole="Payment" ToRole="UserActivity" />
+          <NavigationProperty Name="UserId" Relationship="Model1.UserPayment" FromRole="Payment" ToRole="User" />
+        </EntityType>
+        <EntityType Name="RolFormPermission">
+          <Key>
+            <PropertyRef Name="RolsFormsPermissionsId" />
+          </Key>
+          <Property Name="RolsFormsPermissionsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreateAt" Type="String" Nullable="false" />
+          <Property Name="DeleteAt" Type="String" Nullable="false" />
+          <NavigationProperty Name="RolId" Relationship="Model1.RolFormPermissionRol" FromRole="RolFormPermission" ToRole="Rol" />
+          <NavigationProperty Name="FormId" Relationship="Model1.RolFormPermissionForm" FromRole="RolFormPermission" ToRole="Form" />
+          <NavigationProperty Name="PermissionId" Relationship="Model1.RolFormPermissionPermission" FromRole="RolFormPermission" ToRole="Permission" />
         </EntityType>
         <EntityType Name="ChangeLog">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="User" Relationship="DbModel.UserChangeLog" FromRole="ChangeLog" ToRole="User" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="TableName" Type="String" Nullable="false" />
           <Property Name="RecordId" Type="String" Nullable="false" />
           <Property Name="Action" Type="String" Nullable="false" />
@@ -270,538 +259,104 @@
           <Property Name="CreateAt" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="UserRolUser">
-          <End Type="DbModel.User" Role="User" Multiplicity="1" />
-          <End Type="DbModel.RolUser" Role="RolUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RolUser">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
+          <End Type="Model1.UserRol" Role="UserRol" Multiplicity="*" />
+          <End Type="Model1.User" Role="User" Multiplicity="1" />
         </Association>
-        <Association Name="RolUserRol">
-          <End Type="DbModel.RolUser" Role="RolUser" Multiplicity="1" />
-          <End Type="DbModel.Rol" Role="Rol" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RolUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Rol">
-              <PropertyRef Name="RolUserId" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="FormModuleForm">
+          <End Type="Model1.FormModule" Role="FormModule" Multiplicity="*" />
+          <End Type="Model1.Form" Role="Form" Multiplicity="1" />
         </Association>
-        <Association Name="RolRolFormPermission">
-          <End Type="DbModel.Rol" Role="Rol" Multiplicity="1" />
-          <End Type="DbModel.RolFormPermission" Role="RolFormPermission" Multiplicity="*" />
+        <Association Name="PersonUser">
+          <End Type="Model1.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="Model1.User" Role="User" Multiplicity="1" />
+        </Association>
+        <Association Name="UserRolRol">
+          <End Type="Model1.UserRol" Role="UserRol" Multiplicity="*" />
+          <End Type="Model1.Rol" Role="Rol" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Rol">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RolFormPermission">
               <PropertyRef Name="RolId" />
+            </Principal>
+            <Dependent Role="UserRol">
+              <PropertyRef Name="RolRolId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FormRolFormPermission">
-          <End Type="DbModel.Form" Role="Form" Multiplicity="1" />
-          <End Type="DbModel.RolFormPermission" Role="RolFormPermission" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Form">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RolFormPermission">
-              <PropertyRef Name="FormId" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="RolPermissionRol">
+          <End Type="Model1.RolPermission" Role="RolPermission" Multiplicity="1" />
+          <End Type="Model1.Rol" Role="Rol" Multiplicity="*" />
+        </Association>
+        <Association Name="RolPermissionPermission">
+          <End Type="Model1.RolPermission" Role="RolPermission" Multiplicity="0..1" />
+          <End Type="Model1.Permission" Role="Permission" Multiplicity="*" />
+        </Association>
+        <EntityType Name="UserActivity">
+          <Key>
+            <PropertyRef Name="UserActivityId" />
+          </Key>
+          <Property Name="UserActivityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReseervationDate" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UserId" Relationship="Model1.UserActivityUser" FromRole="UserActivity" ToRole="User" />
+          <NavigationProperty Name="ActivityId" Relationship="Model1.UserActivityActivity" FromRole="UserActivity" ToRole="Activity" />
+          <NavigationProperty Name="PaymentId" Relationship="Model1.UserActivityPayment" FromRole="UserActivity" ToRole="Payment" />
+        </EntityType>
+        <Association Name="UserActivityUser">
+          <End Type="Model1.UserActivity" Role="UserActivity" Multiplicity="*" />
+          <End Type="Model1.User" Role="User" Multiplicity="0..1" />
+        </Association>
+        <Association Name="UserActivityActivity">
+          <End Type="Model1.UserActivity" Role="UserActivity" Multiplicity="*" />
+          <End Type="Model1.Activity" Role="Activity" Multiplicity="0..1" />
+        </Association>
+        <Association Name="FormModuleModule">
+          <End Type="Model1.FormModule" Role="FormModule" Multiplicity="*" />
+          <End Type="Model1.Module" Role="Module" Multiplicity="1" />
+        </Association>
+        <Association Name="RolFormPermissionRol">
+          <End Type="Model1.RolFormPermission" Role="RolFormPermission" Multiplicity="*" />
+          <End Type="Model1.Rol" Role="Rol" Multiplicity="1" />
+        </Association>
+        <Association Name="RolFormPermissionForm">
+          <End Type="Model1.RolFormPermission" Role="RolFormPermission" Multiplicity="*" />
+          <End Type="Model1.Form" Role="Form" Multiplicity="1" />
         </Association>
         <Association Name="RolFormPermissionPermission">
-          <End Type="DbModel.RolFormPermission" Role="RolFormPermission" Multiplicity="*" />
-          <End Type="DbModel.Permission" Role="Permission" Multiplicity="1" />
+          <End Type="Model1.RolFormPermission" Role="RolFormPermission" Multiplicity="*" />
+          <End Type="Model1.Permission" Role="Permission" Multiplicity="1" />
         </Association>
-        <Association Name="UserChangeLog">
-          <End Type="DbModel.User" Role="User" Multiplicity="1" />
-          <End Type="DbModel.ChangeLog" Role="ChangeLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ChangeLog">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="FavoriteUser">
+        <EntityType Name="DestinationActivity">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="DestinationActivityId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUser" Type="String" Nullable="false" />
-          <Property Name="IdService" Type="String" Nullable="false" />
-          <Property Name="DateAdded" Type="String" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="DbModel.UserFavoriteUser" FromRole="FavoriteUser" ToRole="User" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Service" Relationship="DbModel.ServiceFavoriteUser" FromRole="FavoriteUser" ToRole="Service" />
-          <Property Name="ServiceId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="notification" Relationship="DbModel.FavoriteUsernotification" FromRole="FavoriteUser" ToRole="notification" />
+          <Property Name="DestinationActivityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="DestinationId" Relationship="Model1.DestinationActivityDestination" FromRole="DestinationActivity" ToRole="Destination" />
+          <NavigationProperty Name="ActivityId" Relationship="Model1.DestinationActivityActivity" FromRole="DestinationActivity" ToRole="Activity" />
         </EntityType>
-        <EntityType Name="ServiceProvider">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdProvide" Type="String" Nullable="false" />
-          <Property Name="IdUser" Type="String" Nullable="false" />
-          <Property Name="TradeName" Type="String" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" />
-          <Property Name="Address" Type="String" Nullable="false" />
-          <Property Name="ContactTelephone" Type="String" Nullable="false" />
-          <Property Name="Bilingual" Type="String" Nullable="false" />
-          <Property Name="Languages" Type="String" Nullable="false" />
-          <Property Name="AverageRating" Type="String" Nullable="false" />
-          <Property Name="verified" Type="String" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="DbModel.UserServiceProvider" FromRole="ServiceProvider" ToRole="User" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Service1" Relationship="DbModel.ServiceProviderService1" FromRole="ServiceProvider" ToRole="Service" />
-        </EntityType>
-        <Association Name="UserFavoriteUser">
-          <End Type="DbModel.User" Role="User" Multiplicity="1" />
-          <End Type="DbModel.FavoriteUser" Role="FavoriteUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FavoriteUser">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="DestinationActivityDestination">
+          <End Type="Model1.DestinationActivity" Role="DestinationActivity" Multiplicity="*" />
+          <End Type="Model1.Destination" Role="Destination" Multiplicity="0..1" />
         </Association>
-        <Association Name="UserServiceProvider">
-          <End Type="DbModel.User" Role="User" Multiplicity="1" />
-          <End Type="DbModel.ServiceProvider" Role="ServiceProvider" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ServiceProvider">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="DestinationActivityActivity">
+          <End Type="Model1.DestinationActivity" Role="DestinationActivity" Multiplicity="*" />
+          <End Type="Model1.Activity" Role="Activity" Multiplicity="0..1" />
         </Association>
-        <EntityType Name="Service">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdService" Type="String" Nullable="false" />
-          <Property Name="IdProvider" Type="String" Nullable="false" />
-          <Property Name="IdCategory" Type="String" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" />
-          <Property Name="BasePrice" Type="String" Nullable="false" />
-          <Property Name="Duration" Type="String" Nullable="false" />
-          <Property Name="MaximumCapacity" Type="String" Nullable="false" />
-          <Property Name="Available" Type="String" Nullable="false" />
-          <Property Name="Requirements" Type="String" Nullable="false" />
-          <Property Name="Includes" Type="String" Nullable="false" />
-          <Property Name="NotIncluded" Type="String" Nullable="false" />
-          <NavigationProperty Name="FavoriteUser" Relationship="DbModel.ServiceFavoriteUser" FromRole="Service" ToRole="FavoriteUser" />
-          <Property Name="ServiceProviderId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DestinationService" Relationship="DbModel.ServiceDestinationService" FromRole="Service" ToRole="DestinationService" />
-          <NavigationProperty Name="Availability" Relationship="DbModel.ServiceAvailability" FromRole="Service" ToRole="Availability" />
-          <NavigationProperty Name="ServiceProvider1" Relationship="DbModel.ServiceProviderService1" FromRole="Service" ToRole="ServiceProvider" />
-          <Property Name="ServiceProviderId1" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Review" Relationship="DbModel.ServiceReview" FromRole="Service" ToRole="Review" />
-          <NavigationProperty Name="service_category" Relationship="DbModel.service_categoryService" FromRole="Service" ToRole="service_category" />
-          <Property Name="service_categoryId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <Association Name="ServiceFavoriteUser">
-          <End Type="DbModel.Service" Role="Service" Multiplicity="1" />
-          <End Type="DbModel.FavoriteUser" Role="FavoriteUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Service">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FavoriteUser">
-              <PropertyRef Name="ServiceId" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="UserActivityPayment">
+          <End Type="Model1.UserActivity" Role="UserActivity" Multiplicity="*" />
+          <End Type="Model1.Payment" Role="Payment" Multiplicity="*" />
         </Association>
-        <EntityType Name="DestinationService">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Property1" Type="String" Nullable="false" />
-          <NavigationProperty Name="Service" Relationship="DbModel.ServiceDestinationService" FromRole="DestinationService" ToRole="Service" />
-          <Property Name="ServiceId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Destination" Relationship="DbModel.DestinationDestinationService" FromRole="DestinationService" ToRole="Destination" />
-          <Property Name="DestinationId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Imagen">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_image" Type="String" Nullable="false" />
-          <Property Name="id_reference" Type="String" Nullable="false" />
-          <Property Name="reference_type" Type="String" Nullable="false" />
-          <Property Name="url" Type="String" Nullable="false" />
-          <Property Name="title" Type="String" Nullable="false" />
-          <Property Name="description" Type="String" Nullable="false" />
-          <Property Name="order" Type="String" Nullable="false" />
-        </EntityType>
-        <EntityType Name="reservation_detail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_detail" Type="String" Nullable="false" />
-          <Property Name="id_reservation" Type="String" Nullable="false" />
-          <Property Name="id_service" Type="String" Nullable="false" />
-          <Property Name="service_date" Type="String" Nullable="false" />
-          <Property Name="service_time" Type="String" Nullable="false" />
-          <Property Name="number_of_people" Type="String" Nullable="false" />
-          <Property Name="subtotal" Type="String" Nullable="false" />
-          <NavigationProperty Name="Reservation" Relationship="DbModel.Reservationreservation_detail" FromRole="reservation_detail" ToRole="Reservation" />
-          <Property Name="ReservationId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Tag">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_tag" Type="String" Nullable="false" />
-          <Property Name="name" Type="String" Nullable="false" />
-          <NavigationProperty Name="blog_tag" Relationship="DbModel.Tagblog_tag" FromRole="Tag" ToRole="blog_tag" />
-        </EntityType>
-        <EntityType Name="service_category">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_category" Type="String" Nullable="false" />
-          <Property Name="name" Type="String" Nullable="false" />
-          <Property Name="description" Type="String" Nullable="false" />
-          <Property Name="icon" Type="String" Nullable="false" />
-          <NavigationProperty Name="Service" Relationship="DbModel.service_categoryService" FromRole="service_category" ToRole="Service" />
-        </EntityType>
-        <EntityType Name="Availability">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_availability" Type="String" Nullable="false" />
-          <Property Name="id_service" Type="String" Nullable="false" />
-          <Property Name="date" Type="String" Nullable="false" />
-          <Property Name="start_time" Type="String" Nullable="false" />
-          <Property Name="end_time" Type="String" Nullable="false" />
-          <Property Name="available" Type="String" Nullable="false" />
-          <NavigationProperty Name="Service" Relationship="DbModel.ServiceAvailability" FromRole="Availability" ToRole="Service" />
-          <Property Name="ServiceId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Review">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_review" Type="String" Nullable="false" />
-          <Property Name="id_user" Type="String" Nullable="false" />
-          <Property Name="id_service" Type="String" Nullable="false" />
-          <Property Name="rating" Type="String" Nullable="false" />
-          <Property Name="comment" Type="String" Nullable="false" />
-          <Property Name="review_date" Type="String" Nullable="false" />
-          <Property Name="approved" Type="String" Nullable="false" />
-          <NavigationProperty Name="Service" Relationship="DbModel.ServiceReview" FromRole="Review" ToRole="Service" />
-          <Property Name="ServiceId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="DbModel.UserReview" FromRole="Review" ToRole="User" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Blog">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_blog" Type="String" Nullable="false" />
-          <Property Name="id_user" Type="String" Nullable="false" />
-          <Property Name="title" Type="String" Nullable="false" />
-          <Property Name="content" Type="String" Nullable="false" />
-          <Property Name="publish_date" Type="String" Nullable="false" />
-          <Property Name="featured_image" Type="String" Nullable="false" />
-          <Property Name="active" Type="String" Nullable="false" />
-          <Property Name="views" Type="String" Nullable="false" />
-          <NavigationProperty Name="blog_tag" Relationship="DbModel.Blogblog_tag" FromRole="Blog" ToRole="blog_tag" />
-          <NavigationProperty Name="User" Relationship="DbModel.UserBlog" FromRole="Blog" ToRole="User" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="notification">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_notification" Type="String" Nullable="false" />
-          <Property Name="id_user" Type="String" Nullable="false" />
-          <Property Name="title" Type="String" Nullable="false" />
-          <Property Name="message" Type="String" Nullable="false" />
-          <Property Name="creation_date" Type="String" Nullable="false" />
-          <Property Name="read" Type="String" Nullable="false" />
-          <Property Name="notification_type" Type="String" Nullable="false" />
-          <NavigationProperty Name="FavoriteUser" Relationship="DbModel.FavoriteUsernotification" FromRole="notification" ToRole="FavoriteUser" />
-          <Property Name="FavoriteUserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="DbModel.Usernotification" FromRole="notification" ToRole="User" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="payment">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_payment" Type="String" Nullable="false" />
-          <Property Name="id_reservation" Type="String" Nullable="false" />
-          <Property Name="amount" Type="String" Nullable="false" />
-          <Property Name="payment_date" Type="String" Nullable="false" />
-          <Property Name="payment_method" Type="String" Nullable="false" />
-          <Property Name="payment_reference" Type="String" Nullable="false" />
-          <Property Name="payment_status" Type="String" Nullable="false" />
-          <NavigationProperty Name="Reservation" Relationship="DbModel.Reservationpayment" FromRole="payment" ToRole="Reservation" />
-          <Property Name="ReservationId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="blog_tag">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_blog" Type="String" Nullable="false" />
-          <Property Name="id_tag" Type="String" Nullable="false" />
-          <NavigationProperty Name="Blog" Relationship="DbModel.Blogblog_tag" FromRole="blog_tag" ToRole="Blog" />
-          <Property Name="BlogId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Tag" Relationship="DbModel.Tagblog_tag" FromRole="blog_tag" ToRole="Tag" />
-          <Property Name="TagId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <Association Name="ServiceDestinationService">
-          <End Type="DbModel.Service" Role="Service" Multiplicity="1" />
-          <End Type="DbModel.DestinationService" Role="DestinationService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Service">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DestinationService">
-              <PropertyRef Name="ServiceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Destination">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdDestination" Type="String" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" />
-          <Property Name="Latitude" Type="String" Nullable="false" />
-          <Property Name="Length" Type="String" Nullable="false" />
-          <Property Name="Address" Type="String" Nullable="false" />
-          <Property Name="OpeningHours" Type="String" Nullable="false" />
-          <Property Name="Recommendations" Type="String" Nullable="false" />
-          <Property Name="Climate" Type="String" Nullable="false" />
-          <Property Name="IdealSeason" Type="String" Nullable="false" />
-          <Property Name="MainImage" Type="String" Nullable="false" />
-          <NavigationProperty Name="DestinationService" Relationship="DbModel.DestinationDestinationService" FromRole="Destination" ToRole="DestinationService" />
-        </EntityType>
-        <Association Name="DestinationDestinationService">
-          <End Type="DbModel.Destination" Role="Destination" Multiplicity="1" />
-          <End Type="DbModel.DestinationService" Role="DestinationService" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Destination">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DestinationService">
-              <PropertyRef Name="DestinationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ServiceAvailability">
-          <End Type="DbModel.Service" Role="Service" Multiplicity="1" />
-          <End Type="DbModel.Availability" Role="Availability" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Service">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Availability">
-              <PropertyRef Name="ServiceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ServiceProviderService1">
-          <End Type="DbModel.ServiceProvider" Role="ServiceProvider" Multiplicity="1" />
-          <End Type="DbModel.Service" Role="Service" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ServiceProvider">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Service">
-              <PropertyRef Name="ServiceProviderId1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Reservation">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdReservartion" Type="String" Nullable="false" />
-          <Property Name="IdUser" Type="String" Nullable="false" />
-          <Property Name="ReservationDate" Type="String" Nullable="false" />
-          <Property Name="State" Type="String" Nullable="false" />
-          <Property Name="total" Type="String" Nullable="false" />
-          <Property Name="SpecialNotes" Type="String" Nullable="false" />
-          <NavigationProperty Name="reservation_detail" Relationship="DbModel.Reservationreservation_detail" FromRole="Reservation" ToRole="reservation_detail" />
-          <NavigationProperty Name="User" Relationship="DbModel.UserReservation" FromRole="Reservation" ToRole="User" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="payment" Relationship="DbModel.Reservationpayment" FromRole="Reservation" ToRole="payment" />
-        </EntityType>
-        <Association Name="Reservationreservation_detail">
-          <End Type="DbModel.Reservation" Role="Reservation" Multiplicity="1" />
-          <End Type="DbModel.reservation_detail" Role="reservation_detail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Reservation">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="reservation_detail">
-              <PropertyRef Name="ReservationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="UserReservation">
-          <End Type="DbModel.User" Role="User" Multiplicity="1" />
-          <End Type="DbModel.Reservation" Role="Reservation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Reservation">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Reservationpayment">
-          <End Type="DbModel.Reservation" Role="Reservation" Multiplicity="1" />
-          <End Type="DbModel.payment" Role="payment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Reservation">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="payment">
-              <PropertyRef Name="ReservationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FavoriteUsernotification">
-          <End Type="DbModel.FavoriteUser" Role="FavoriteUser" Multiplicity="1" />
-          <End Type="DbModel.notification" Role="notification" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FavoriteUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="notification">
-              <PropertyRef Name="FavoriteUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Usernotification">
-          <End Type="DbModel.User" Role="User" Multiplicity="1" />
-          <End Type="DbModel.notification" Role="notification" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="notification">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Blogblog_tag">
-          <End Type="DbModel.Blog" Role="Blog" Multiplicity="1" />
-          <End Type="DbModel.blog_tag" Role="blog_tag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Blog">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="blog_tag">
-              <PropertyRef Name="BlogId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="UserBlog">
-          <End Type="DbModel.User" Role="User" Multiplicity="1" />
-          <End Type="DbModel.Blog" Role="Blog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Blog">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Tagblog_tag">
-          <End Type="DbModel.Tag" Role="Tag" Multiplicity="1" />
-          <End Type="DbModel.blog_tag" Role="blog_tag" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tag">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="blog_tag">
-              <PropertyRef Name="TagId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ServiceReview">
-          <End Type="DbModel.Service" Role="Service" Multiplicity="1" />
-          <End Type="DbModel.Review" Role="Review" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Service">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Review">
-              <PropertyRef Name="ServiceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="UserReview">
-          <End Type="DbModel.User" Role="User" Multiplicity="1" />
-          <End Type="DbModel.Review" Role="Review" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Review">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="service_categoryService">
-          <End Type="DbModel.service_category" Role="service_category" Multiplicity="1" />
-          <End Type="DbModel.Service" Role="Service" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="service_category">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Service">
-              <PropertyRef Name="service_categoryId" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="UserPayment">
+          <End Type="Model1.User" Role="User" Multiplicity="0..1" />
+          <End Type="Model1.Payment" Role="Payment" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
-        <Alias Key="Model" Value="DbModel" />
-        <Alias Key="Target" Value="DbModel.Store" />
-        <EntityContainerMapping CdmEntityContainer="DbModelContainer" StorageEntityContainer="DbModelTargetContainer">
+        <Alias Key="Model" Value="Model1" />
+        <Alias Key="Target" Value="Model1.Store" />
+        <EntityContainerMapping CdmEntityContainer="Model1Container" StorageEntityContainer="Model1TargetContainer">
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -817,6 +372,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
