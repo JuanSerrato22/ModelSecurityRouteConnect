@@ -1,5 +1,5 @@
 using Business;
-using Entity.DTOs;
+using Entity.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
