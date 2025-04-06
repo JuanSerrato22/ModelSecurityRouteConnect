@@ -82,7 +82,7 @@ namespace Business
         {
             try
             {
-                ValidateUser(PermissionDto);
+                ValidatePermission(PermissionDto);
 
                 var permission = new Permission
                 {
