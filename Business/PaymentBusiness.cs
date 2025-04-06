@@ -19,7 +19,7 @@ namespace Business
         }
 
         // Método para obtener todos los pagos como DTOs
-        public async Task<IEnumerable<PaymentDTO>> GetAllPaymentAsync()
+        public async Task<IEnumerable<PaymentDTO>> GetAllPaymentsAsync()
         {
             try
             {
@@ -47,7 +47,7 @@ namespace Business
         }
 
         // Método para obtener un pago por ID como DTO
-        public async Task<PaymentDTO> GetPaymentsByIdAsync(int id)
+        public async Task<PaymentDTO> GetPaymentByIdAsync(int id)
         {
             if (id <= 0)
             {

@@ -20,7 +20,7 @@ namespace Business
         }
 
         // Método para obtener todos los formularios como DTOs
-        public async Task<IEnumerable<FormDTO>> GetAllFormAsync()
+        public async Task<IEnumerable<FormDTO>> GetAllFormsAsync()
         {
             try
             {

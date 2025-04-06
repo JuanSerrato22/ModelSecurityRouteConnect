@@ -20,7 +20,7 @@ namespace Business
         }
 
         // Método para obtener todos los destinos como DTOs
-        public async Task<IEnumerable<DestinationDTO>> GetAllDestinationAsync()
+        public async Task<IEnumerable<DestinationDTO>> GetAllDestinationsAsync()
         {
             try
             {

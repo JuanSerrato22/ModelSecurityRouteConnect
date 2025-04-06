@@ -18,7 +18,7 @@ namespace Business
         }
 
         // Método para obtener todas las personas como DTOs
-        public async Task<IEnumerable<PersonDTO>> GetAllRolesAsync()
+        public async Task<IEnumerable<PersonDTO>> GetAllPersonsAsync()
         {
             try
             {
@@ -48,7 +48,7 @@ namespace Business
         }
 
         // Método para obtener una persona por ID como DTO
-        public async Task<PersonDTO> GetRolByIdAsync(int id)
+        public async Task<PersonDTO> GetPersonByIdAsync(int id)
         {
             if (id <= 0)
             {
@@ -83,7 +83,7 @@ namespace Business
         }
 
         // Método para crear una persona desde un DTO
-        public async Task<PersonDTO> CreateRolAsync(PersonDTO PersonDto)
+        public async Task<PersonDTO> CreatePersonAsync(PersonDTO PersonDto)
         {
             try
             {
@@ -131,5 +131,6 @@ namespace Business
                 throw new Utilities.Exceptions.ValidationException("Name", "El Name de la persona es obligatorio");
             }
         }
+
     }
 }
