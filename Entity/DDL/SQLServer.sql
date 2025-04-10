@@ -134,17 +134,17 @@ CREATE TABLE ChangeLog (
 );
 
 
---usuario
+-- usuario
 ALTER TABLE [User] ADD CONSTRAINT FK_User_Person FOREIGN KEY (PersonId) REFERENCES Person(PersonId);
 
---roles
+-- roles
 ALTER TABLE UserRol ADD CONSTRAINT FK_UserRol_User FOREIGN KEY (UserId) REFERENCES [User](UserId);
 ALTER TABLE UserRol ADD CONSTRAINT FK_UserRol_Rol FOREIGN KEY (RolId) REFERENCES Rol(RolId);
 
 ALTER TABLE RolPermission ADD CONSTRAINT FK_RolPermission_Rol FOREIGN KEY (RolId) REFERENCES Rol(RolId);
 ALTER TABLE RolPermission ADD CONSTRAINT FK_RolPermission_Permission FOREIGN KEY (PermissionId) REFERENCES Permission(PermissionId);
 
---formularios y módulos
+-- formularios y módulos
 ALTER TABLE FormModule ADD CONSTRAINT FK_FormModule_Form FOREIGN KEY (FormId) REFERENCES Form(FormId);
 ALTER TABLE FormModule ADD CONSTRAINT FK_FormModule_Module FOREIGN KEY (ModuleId) REFERENCES Module(ModuleId);
 
@@ -152,13 +152,13 @@ ALTER TABLE RolFormPermission ADD CONSTRAINT FK_RolFormPermission_Rol FOREIGN KE
 ALTER TABLE RolFormPermission ADD CONSTRAINT FK_RolFormPermission_Form FOREIGN KEY (FormId) REFERENCES Form(FormId);
 ALTER TABLE RolFormPermission ADD CONSTRAINT FK_RolFormPermission_Permission FOREIGN KEY (PermissionId) REFERENCES Permission(PermissionId);
 
---actividades y pagos
+-- actividades y pagos
 ALTER TABLE Payment ADD CONSTRAINT FK_Payment_User FOREIGN KEY (UserId) REFERENCES [User](UserId);
 
 ALTER TABLE UserActivity ADD CONSTRAINT FK_UserActivity_User FOREIGN KEY (UserId) REFERENCES [User](UserId);
 ALTER TABLE UserActivity ADD CONSTRAINT FK_UserActivity_Activity FOREIGN KEY (ActivityId) REFERENCES Activity(ActivityId);
 ALTER TABLE UserActivity ADD CONSTRAINT FK_UserActivity_Payment FOREIGN KEY (PaymentId) REFERENCES Payment(PaymentId);
 
---destino
+-- destino
 ALTER TABLE DestinationActivity ADD CONSTRAINT FK_DestinationActivity_Destination FOREIGN KEY (DestinationId) REFERENCES Destination(DestinationId);
 ALTER TABLE DestinationActivity ADD CONSTRAINT FK_DestinationActivity_Activity FOREIGN KEY (ActivityId) REFERENCES Activity(ActivityId);
