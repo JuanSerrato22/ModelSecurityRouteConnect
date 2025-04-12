@@ -32,7 +32,11 @@ namespace Business
                     destinationsDTO.Add(new DestinationDTO
                     {
                         DestinationId = destination.DestinationId,
-                        Name = destination.Name
+                        Name = destination.Name,
+                        Description = destination.Description,
+                        Region = destination.Region,
+                        Latitude = destination.Latitude,
+                        Longitude = destination.Longitude
                     });
                 }
 
@@ -67,6 +71,10 @@ namespace Business
                 {
                     DestinationId = destination.DestinationId,
                     Name = destination.Name,
+                    Description = destination.Description,
+                    Region = destination.Region,
+                    Latitude = destination.Latitude,
+                    Longitude = destination.Longitude
                 };
             }
 
@@ -87,6 +95,10 @@ namespace Business
                 var destination = new Destination
                 {
                     Name = DestinationDto.Name,
+                    Description = DestinationDto.Description,
+                    Region = DestinationDto.Region,
+                    Latitude = DestinationDto.Latitude,
+                    Longitude = DestinationDto.Longitude
                 };
 
                 var destinationCreado = await _destinationData.CreateAsync(destination);
