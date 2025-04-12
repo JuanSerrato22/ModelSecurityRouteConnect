@@ -10,9 +10,9 @@ namespace Business
     public class ModuleBusiness
     {
         private readonly ModuleData _moduleData;
-        private readonly ILogger _logger;
+        private readonly ILogger<Module> _logger;
 
-        public ModuleBusiness(ModuleData moduleData, ILogger logger)
+        public ModuleBusiness(ModuleData moduleData, ILogger<Module> logger)
         {
             _moduleData = moduleData;
             _logger = logger;

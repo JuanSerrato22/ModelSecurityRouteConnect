@@ -2,7 +2,6 @@ using Business;
 using Data;
 using Entity.Context;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 

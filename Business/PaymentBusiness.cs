@@ -10,9 +10,9 @@ namespace Business
     public class PaymentBusiness
     {
         private readonly PaymentData _paymentData;
-        private readonly ILogger _logger;
+        private readonly ILogger<Payment> _logger;
 
-        public PaymentBusiness(PaymentData paymentData, ILogger logger)
+        public PaymentBusiness(PaymentData paymentData, ILogger<Payment> logger)
         {
             _paymentData = paymentData;
             _logger = logger;

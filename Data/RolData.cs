@@ -12,13 +12,13 @@ namespace Data
     public class RolData
     {
         private readonly ApplicationDbContext _context;
-        private readonly ILogger _logger;
+        private readonly ILogger<Rol> _logger;
 
         ///<summary>
         ///Constructor que recibe el contexto de base de datos.
         ///</summary>
         ///<param name="=context">Instancia de <see cref="ApplicationDbContext"/> para la conexión con la base de datos.</param>
-        public RolData(ApplicationDbContext context, ILogger logger)
+        public RolData(ApplicationDbContext context, ILogger<Rol> logger)
         {
             _context = context;
             _logger = logger;
@@ -108,11 +108,6 @@ namespace Data
                 Console.WriteLine($"Error al eliminar el rol: {ex.Message}");
                 return false;
             }
-        }
-
-        public async Task CreateAsync(RolDTO rolDto)
-        {
-            throw new NotImplementedException();
         }
     }
 }

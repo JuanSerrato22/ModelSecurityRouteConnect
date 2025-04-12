@@ -10,9 +10,9 @@ namespace Business
     public class ActivityBusiness
     {
         private readonly ActivityData _activityData;
-        private readonly ILogger _logger;
+        private readonly ILogger<Activity> _logger;
 
-        public ActivityBusiness(ActivityData activityData, ILogger logger)
+        public ActivityBusiness(ActivityData activityData, ILogger<Activity> logger)
         {
             _activityData = activityData;
             _logger = logger;
