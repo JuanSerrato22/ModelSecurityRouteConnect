@@ -6,7 +6,6 @@ using Utilities.Exceptions;
 
 namespace Business
 {
-
     public class UserBusiness
     {
         private readonly UserData _userData;
