@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Data
 {
     /// <summary>
-    /// Repositorio encargado de la gestión de la entidad Rol en la base de datos.
+    /// Repositorio encargado de la gestión de la entidad ChangeLog en la base de datos.
     /// </summary>
     public class ChangeLogData
     {

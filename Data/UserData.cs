@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Data
 {
     /// <summary>
-    /// Repositorio encargado de la gestión de la entidad Rol en la base de datos.
+    /// Repositorio encargado de la gestión de la entidad Usuario en la base de datos.
     /// </summary>
     public class UserData
     {
@@ -24,9 +24,9 @@ namespace Data
         }
 
         ///<summary>
-        ///Obtiene todos los roles almacenados en la base de datos.
+        ///Obtiene todos los usuarios almacenados en la base de datos.
         ///</summary>
-        ///<returns>Lista de roles.</returns>
+        ///<returns>Lista de usuarios.</returns>
         public async Task<IEnumerable<User>> GetAllAsync()
         {
             return await _context.Set<User>().ToListAsync();
