@@ -41,11 +41,16 @@ namespace Entity.Context
         public DbSet<Form> Form { get; set; }
         public DbSet<Module> Module { get; set; }
         public DbSet<Activity> Activity { get; set; }
-        public DbSet<Module> Module { get; set; }
-        public DbSet<Module> Module { get; set; }
-        public DbSet<Module> Module { get; set; }
-        public DbSet<Module> Module { get; set; }
-        public DbSet<Module> Module { get; set; }
+        public DbSet<ChangeLog> ChangeLog { get; set; }
+        public DbSet<Destination> Destination { get; set; }
+        public DbSet<DestinationActivity> DestinationActivity { get; set; }
+        public DbSet<FormModule> FormModule { get; set; }
+        public DbSet<Payment> Payment { get; set; }
+        public DbSet<Permission> Permission { get; set; }
+        public DbSet<RolFormPermission> RolFormPermission { get; set; }
+        public DbSet<RolPermission> RolPermission { get; set; }
+        public DbSet<UserActivity> UserActivity { get; set; }
+        public DbSet<UserRol> UserRol { get; set; }
 
 
 
