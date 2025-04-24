@@ -40,6 +40,13 @@ namespace Entity.Context
         public DbSet<Person> Person { get; set; }
         public DbSet<Form> Form { get; set; }
         public DbSet<Module> Module { get; set; }
+        public DbSet<Activity> Activity { get; set; }
+        public DbSet<Module> Module { get; set; }
+        public DbSet<Module> Module { get; set; }
+        public DbSet<Module> Module { get; set; }
+        public DbSet<Module> Module { get; set; }
+        public DbSet<Module> Module { get; set; }
+
 
 
 

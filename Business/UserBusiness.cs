@@ -51,7 +51,7 @@ namespace Business
             if (id <= 0)
             {
                 _logger.LogWarning("Se intentó obtener un usuario con ID inválido: {UserId}", id);
-                throw new Utilities.Exceptions.ValidationException("id", "El ID del usuario debe ser mayor que cero");
+                throw new ValidationException("id", "El ID del usuario debe ser mayor que cero");
             }
 
             try
@@ -60,23 +60,21 @@ namespace Business
                 if (user == null)
                 {
                     _logger.LogInformation("No se encontró ningún usuario con ID: {UserId}", id);
-                    throw new EntityNotFoundException("Usuario", id);
+                    throw new EntityNotFoundException("User", id);
                 }
 
-                return new UserDTO
-                {
-                    UserId = user.UserId,
-                    Username = user.Username,
-                    Email = user.Email,
-                    Password = user.Password
-                };
+                return MapToDTO(user);
             }
-
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error al obtener el usuario con ID: {UserId}", id);
                 throw new ExternalServiceException("Base de datos", $"Error al recuperar el usuario con ID {id}", ex);
             }
+        }
+
+        private UserDTO MapToDTO(User user)
+        {
+            throw new NotImplementedException();
         }
 
         // Método para crear un usuario desde un DTO
@@ -92,6 +90,8 @@ namespace Business
                     Email = UserDto.Email,
                     Password = UserDto.Password
                 };
+
+                user.RegistrationDate = DateTime.Now;
 
                 var userCreado = await _userData.CreateAsync(user);
 

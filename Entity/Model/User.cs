@@ -9,7 +9,7 @@ namespace Entity.Model
         public required string Email  { get; set; }
         public DateTime RegistrationDate { get; set; }
         public required string Password { get; set; }
-        public string? DeleteAt { get; set; }
-        public string? CreateAt { get; set; }
+        public string DeleteAt { get; set; }
+        public string CreateAt { get; set; }
     }
 }
