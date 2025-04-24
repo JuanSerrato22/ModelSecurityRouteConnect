@@ -4,36 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Entity.Model;
-using Microsoft.EntityFrameworkCore;
-
-namespace Data
+namespace Entity.DTO
 {
-    public class DestinationActivityData
+    public class DestinationActivityDTO
     {
-        private readonly DbContext _context;
-
-        public DestinationActivityData(DbContext context)
-        {
-            _context = context;
-        }
-
-        public async Task<IEnumerable<DestinationActivity>> GetAllAsync()
-        {
-            return await _context.Set<DestinationActivity>().ToListAsync();
-        }
-
-        public async Task<DestinationActivity?> GetByIdAsync(int id)
-        {
-            return await _context.Set<DestinationActivity>().FindAsync(id);
-        }
-
-        public async Task<DestinationActivity> CreateAsync(DestinationActivity activity)
-        {
-            _context.Set<DestinationActivity>().Add(activity);
-            await _context.SaveChangesAsync();
-            return activity;
-        }
+        public int DestinationActivityId { get; set; }
+        public int DestinationId { get; set; }
+        public int ActivityId { get; set; }
     }
 }
-

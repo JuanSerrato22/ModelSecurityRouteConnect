@@ -111,9 +111,9 @@
         </EntityType>
         <EntityType Name="Rol">
           <Key>
-            <PropertyRef Name="RolId" />
+            <PropertyRef Name="RolRolId" />
           </Key>
-          <Property Name="RolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RolRolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RolName" Type="String" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" />
           <NavigationProperty Name="UserRol" Relationship="Model1.UserRolRol" FromRole="Rol" ToRole="UserRol" />
@@ -275,7 +275,7 @@
           <End Type="Model1.Rol" Role="Rol" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Rol">
-              <PropertyRef Name="RolId" />
+              <PropertyRef Name="RolRolId" />
             </Principal>
             <Dependent Role="UserRol">
               <PropertyRef Name="RolRolId" />
