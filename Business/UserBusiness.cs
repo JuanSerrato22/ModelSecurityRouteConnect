@@ -126,5 +126,40 @@ namespace Business
                 throw new Utilities.Exceptions.ValidationException("Name", "El Name del usuario es obligatorio");
             }
         }
+
+        // Método para actualizar el usuario desde un DTO
+        public async Task<UserDTO?> UpdateUserAsync(UserDTO UserDto)
+        {
+            try
+            {
+                ValidateUser(UserDto);
+
+                var userExistente = await _userData.GetByIdAsync(UserDto.UserId);
+
+                if (userExistente == null)
+                {
+                    return null; // El controlador se encarga de devolver NotFound
+                }
+
+                userExistente.Username = UserDto.Username;
+                userExistente.Email = UserDto.Email;
+                userExistente.Password = UserDto.Password;
+
+                var userActualizado = await _userData.UpdateUserAsync(userExistente);
+
+                return new UserDTO
+                {
+                    UserId = userActualizado.UserId,
+                    Username = userActualizado.Username,
+                    Email = userActualizado.Email,
+                    Password = userActualizado.Password
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al actualizar usuario: {UserId}", UserDto?.UserId ?? 0);
+                throw new ExternalServiceException("Base de datos", "Error al actualizar el usuario", ex);
+            }
+        }
     }
 }

@@ -106,5 +106,41 @@ namespace Web.Controllers
                 return StatusCode(500, new { message = ex.Message });
             }
         }
+
+        /// <summary>
+        /// Actualiza los datos de un usuario existente
+        /// </summary>
+        [HttpPut("{id}")]
+        [ProducesResponseType(typeof(UserDTO), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] UserDTO userDto)
+        {
+            // Forzar que el ID en el DTO sea el mismo que el de la URL
+            userDto.UserId = id;
+
+            try
+            {
+                var updatedUser = await _UserBusiness.UpdateUserAsync(userDto);
+
+                if (updatedUser == null)
+                {
+                    return NotFound(new { message = $"No se encontró un usuario con ID {id}" });
+                }
+
+                return Ok(updatedUser);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogWarning(ex, "Validación fallida al actualizar usuario");
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (ExternalServiceException ex)
+            {
+                _logger.LogError(ex, "Error al actualizar usuario");
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
     }
 }

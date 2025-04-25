@@ -108,5 +108,25 @@ namespace Data
                 return false;
             }
         }
+
+        /// <summary>
+        /// Actualiza un usuario existente en la base de datos.
+        /// </summary>
+        /// <param name="user">Instancia del usuario con datos actualizados.</param>
+        /// <returns>El usuario actualizado.</returns>
+        public async Task<User> UpdateUserAsync(User user)
+        {
+            try
+            {
+                _context.Set<User>().Update(user);
+                await _context.SaveChangesAsync();
+                return user;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error al actualizar el usuario: {ex.Message}");
+                throw;
+            }
+        }
     }
 }
