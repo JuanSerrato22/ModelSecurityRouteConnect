@@ -158,5 +158,136 @@ namespace Web.Controllers
                 return StatusCode(500, new { message = ex.Message });
             }
         }
+
+        /// <summary>
+        /// Elimina un rol de la base de datos.
+        /// </summary>
+        /// <param name="id">Identificador único del rol a eliminar.</param>
+        /// <returns>True si la operación fue exitosa, False en caso contrario.</returns>
+        /// <response code="200">Retorna el mensaje de éxito si el rol fue eliminado correctamente</response>
+        /// <response code="404">Rol no encontrado</response>
+        /// <response code="500">Error interno del servidor</response>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> DeleteRol(int id)
+        {
+            try
+            {
+                var isDeleted = await _RolBusiness.DeleteRolAsync(id);
+
+                if (!isDeleted)
+                {
+                    return NotFound(new { message = $"No se encontró un rol con ID {id}" });
+                }
+
+                return Ok(new { message = "Rol eliminado correctamente" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al eliminar rol con ID: {RolId}", id);
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+        /// <summary>
+        /// Elimina lógicamente un rol del sistema
+        /// </summary>
+        [HttpDelete("softdelete/{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> SoftDeleteUser(int id)
+        {
+            try
+            {
+                var result = await _RolBusiness.SoftDeleteRolAsync(id);
+
+                if (!result)
+                {
+                    return NotFound(new { message = $"No se encontró un rol con ID {id}" });
+                }
+
+                return NoContent(); // Eliminado lógico exitoso
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogWarning(ex, "Validación fallida al intentar eliminar lógicamente rol");
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (ExternalServiceException ex)
+            {
+                _logger.LogError(ex, "Error al eliminar lógicamente rol");
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Restaura un rol eliminado lógicamente.
+        /// </summary>
+        [HttpPatch("restore/{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> RestoreRol(int id)
+        {
+            try
+            {
+                var result = await _RolBusiness.RestoreRolAsync(id);
+
+                if (!result)
+                {
+                    return NotFound(new { message = $"No se encontró un rol con ID {id}" });
+                }
+
+                return Ok(new { message = $"Rol restaurado correctamente" });
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogWarning(ex, "Validación fallida al intentar restaurar rol");
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (ExternalServiceException ex)
+            {
+                _logger.LogError(ex, "Error al restaurar rol");
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Actualiza parcialmente los datos de un rol existente.
+        /// </summary>
+        [HttpPatch("{id}")]
+        [ProducesResponseType(typeof(RolDTO), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> PartialUpdateRol(int id, [FromBody] RolDTO rolDto)
+        {
+            try
+            {
+                var updatedRol = await _RolBusiness.PartialUpdateRolAsync(id, rolDto);
+
+                if (updatedRol == null)
+                {
+                    return NotFound(new { message = $"No se encontró un usuario con ID {id}" });
+                }
+
+                return Ok(updatedRol);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogWarning(ex, "Validación fallida al modificar parte del usuario");
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (ExternalServiceException ex)
+            {
+                _logger.LogError(ex, "Error al modificar parte del usuario");
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+
     }
 }
