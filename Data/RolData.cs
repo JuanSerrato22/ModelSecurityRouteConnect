@@ -109,5 +109,25 @@ namespace Data
                 return false;
             }
         }
+
+        /// <summary>
+        /// Actualiza un usuario existente en la base de datos.
+        /// </summary>
+        /// <param name="rol">Instancia del rol con datos actualizados.</param>
+        /// <returns>El rol actualizado.</returns>
+        public async Task<Rol> UpdateRolAsync(Rol rol)
+        {
+            try
+            {
+                _context.Set<Rol>().Update(rol);
+                await _context.SaveChangesAsync();
+                return rol;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error al actualizar el rol: {ex.Message}");
+                throw;
+            }
+        }
     }
 }

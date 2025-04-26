@@ -123,5 +123,40 @@ namespace Web.Controllers
             }
         }
 
+        /// <summary>
+        /// Actualiza los datos de un usuario existente
+        /// </summary>
+        [HttpPut("{id}")]
+        [ProducesResponseType(typeof(RolDTO), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> UpdateRol(int id, [FromBody] RolDTO rolDto)
+        {
+            // Forzar que el ID en el DTO sea el mismo que el de la URL
+            rolDto.RolId = id;
+
+            try
+            {
+                var updatedRol = await _RolBusiness.UpdateRolAsync(rolDto);
+
+                if (updatedRol == null)
+                {
+                    return NotFound(new { message = $"No se encontró un rol con ID {id}" });
+                }
+
+                return Ok(updatedRol);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogWarning(ex, "Validación fallida al actualizar rol");
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (ExternalServiceException ex)
+            {
+                _logger.LogError(ex, "Error al actualizar rol");
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
     }
 }

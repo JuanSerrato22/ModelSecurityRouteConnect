@@ -226,11 +226,7 @@ namespace Business
             }
         }
 
-        /// <summary>
-        /// Elimina lógicamente un usuario (soft delete).
-        /// </summary>
-        /// <param name="id">ID del usuario a eliminar lógicamente.</param>
-        /// <returns>True si se eliminó correctamente, False si no se encontró el usuario.</returns>
+        // Elimina lógicamente un usuario (soft delete).
         public async Task<bool> SoftDeleteUserAsync(int id)
         {
             if (id <= 0)
@@ -251,11 +247,7 @@ namespace Business
             }
         }
 
-        /// <summary>
-        /// Restaura un usuario eliminado lógicamente.
-        /// </summary>
-        /// <param name="id">ID del usuario a restaurar.</param>
-        /// <returns>True si la restauración fue exitosa, False si no se encontró el usuario.</returns>
+        // Restaura un usuario eliminado lógicamente.
         public async Task<bool> RestoreUserAsync(int id)
         {
             if (id <= 0)
@@ -276,6 +268,7 @@ namespace Business
             }
         }
 
+        // Modifica un usuario parcialmente.
         public async Task<UserDTO?> PartialUpdateUserAsync(int id, PartialUserDTO partialUserDto)
         {
             try

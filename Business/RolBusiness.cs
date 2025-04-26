@@ -121,5 +121,38 @@ namespace Business
                 throw new Utilities.Exceptions.ValidationException("Name", "El Name del rol es obligatorio");
             }
         }
+
+        // Método para actualizar el usuario desde un DTO
+        public async Task<RolDTO?> UpdateRolAsync(RolDTO RolDto)
+        {
+            try
+            {
+                ValidateRol(RolDto);
+
+                var rolExistente = await _rolData.GetByIdAsync(RolDto.RolId);
+
+                if (rolExistente == null)
+                {
+                    return null; // El controlador se encarga de devolver NotFound
+                }
+
+                rolExistente.RolName = RolDto.RolName;
+                rolExistente.Description = RolDto.Description;
+
+                var rolActualizado = await _rolData.UpdateRolAsync(rolExistente);
+
+                return new RolDTO
+                {
+                    RolId = rolActualizado.RolId,
+                    RolName = rolActualizado.RolName,
+                    Description = rolActualizado.Description
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al actualizar rol: {RolId}", RolDto?.RolId ?? 0);
+                throw new ExternalServiceException("Base de datos", "Error al actualizar el rol", ex);
+            }
+        }
     }
 }
