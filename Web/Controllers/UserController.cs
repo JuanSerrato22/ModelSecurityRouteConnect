@@ -48,6 +48,25 @@ namespace Web.Controllers
                 return StatusCode(500, new { message = ex.Message });
             }
         }
+        /// <summary>
+        /// Obtiene los usuarios activos del sistema
+        /// </summary>
+        [HttpGet("active")]
+        [ProducesResponseType(typeof(IEnumerable<UserDTO>), 200)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GetActiveUsers()
+        {
+            try
+            {
+                var users = await _UserBusiness.GetAllActiveUsersAsync();
+                return Ok(users);
+            }
+            catch (ExternalServiceException ex)
+            {
+                _logger.LogError(ex, "Error al obtener los usuarios activos");
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
 
         /// <summary>
         /// Obtiene un usuario específico por su ID
@@ -211,7 +230,7 @@ namespace Web.Controllers
         /// <summary>
         /// Restaura un usuario eliminado lógicamente.
         /// </summary>
-        [HttpPut("restore/{id}")]
+        [HttpPatch("restore/{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -237,6 +256,39 @@ namespace Web.Controllers
             catch (ExternalServiceException ex)
             {
                 _logger.LogError(ex, "Error al restaurar usuario");
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Modifica una parte del usuario (campos específicos).
+        /// </summary>
+        [HttpPatch("{id}")]
+        [ProducesResponseType(typeof(UserDTO), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> PartialUpdateUser(int id, [FromBody] PartialUserDTO partialUserDto)
+        {
+            try
+            {
+                var updatedUser = await _UserBusiness.PartialUpdateUserAsync(id, partialUserDto);
+
+                if (updatedUser == null)
+                {
+                    return NotFound(new { message = $"No se encontró un usuario con ID {id}" });
+                }
+
+                return Ok(updatedUser);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogWarning(ex, "Validación fallida al modificar parte del usuario");
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (ExternalServiceException ex)
+            {
+                _logger.LogError(ex, "Error al modificar parte del usuario");
                 return StatusCode(500, new { message = ex.Message });
             }
         }

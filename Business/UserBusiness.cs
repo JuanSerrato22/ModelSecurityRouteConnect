@@ -45,6 +45,35 @@ namespace Business
             }
         }
 
+        //Obtiene únicamente los usuarios que no están eliminados lógicamente.
+        public async Task<IEnumerable<UserDTO>> GetAllActiveUsersAsync()
+        {
+            try
+            {
+                var users = await _userData.GetAllActiveAsync();
+                var usersDTO = new List<UserDTO>();
+
+                foreach (var user in users)
+                {
+                    usersDTO.Add(new UserDTO
+                    {
+                        UserId = user.UserId,
+                        Username = user.Username,
+                        Email = user.Email,
+                        Password = user.Password
+                    });
+                }
+
+                return usersDTO;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al obtener los usuarios activos");
+                throw new ExternalServiceException("Base de datos", "Error al recuperar los usuarios activos", ex);
+            }
+        }
+
+
         // Método para obtener un usuario por ID como DTO
         public async Task<UserDTO> GetUserByIdAsync(int id)
         {
@@ -244,6 +273,51 @@ namespace Business
             {
                 _logger.LogError(ex, "Error al restaurar el usuario con ID: {UserId}", id);
                 throw new ExternalServiceException("Base de datos", "Error al restaurar el usuario", ex);
+            }
+        }
+
+        public async Task<UserDTO?> PartialUpdateUserAsync(int id, PartialUserDTO partialUserDto)
+        {
+            try
+            {
+                var userExistente = await _userData.GetByIdAsync(id);
+
+                if (userExistente == null)
+                {
+                    return null; // No se encontró el usuario
+                }
+
+                // Modificar solo los campos presentes en el DTO
+                if (!string.IsNullOrEmpty(partialUserDto.Username))
+                {
+                    userExistente.Username = partialUserDto.Username;
+                }
+
+                if (!string.IsNullOrEmpty(partialUserDto.Email))
+                {
+                    userExistente.Email = partialUserDto.Email;
+                }
+
+                if (!string.IsNullOrEmpty(partialUserDto.Password))
+                {
+                    userExistente.Password = partialUserDto.Password;
+                }
+
+                // Aquí actualizamos los datos en la base de datos
+                var updatedUser = await _userData.UpdateUserAsync(userExistente);
+
+                return new UserDTO
+                {
+                    UserId = updatedUser.UserId,
+                    Username = updatedUser.Username,
+                    Email = updatedUser.Email,
+                    Password = updatedUser.Password
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al modificar parte del usuario con ID: {UserId}", id);
+                throw new ExternalServiceException("Base de datos", "Error al modificar parte del usuario", ex);
             }
         }
 

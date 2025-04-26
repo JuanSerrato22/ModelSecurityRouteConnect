@@ -45,6 +45,17 @@ namespace Data
             }
         }
 
+        /// <summary>
+        /// Obtiene únicamente los usuarios que no están eliminados lógicamente.
+        /// </summary>
+        /// <returns>Lista de usuarios activos.</returns>
+        public async Task<IEnumerable<User>> GetAllActiveAsync()
+        {
+            return await _context.Set<User>()
+                                 .Where(u => u.DeleteAt == null)
+                                 .ToListAsync();
+        }
+
         ///<summary>
         ///Crea un nuevo rol en la base de datos.
         ///</summary>
