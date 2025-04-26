@@ -128,5 +128,59 @@ namespace Data
                 throw;
             }
         }
+
+        /// <summary>
+        /// Realiza un eliminado lógico del usuario (marca el campo DeleteAt).
+        /// </summary>
+        /// <param name="id">ID del usuario a eliminar lógicamente.</param>
+        /// <returns>True si la operación fue exitosa, False si no se encontró el usuario.</returns>
+        public async Task<bool> SoftDeleteAsync(int id)
+        {
+            try
+            {
+                var user = await _context.Set<User>().FindAsync(id);
+                if (user == null)
+                    return false;
+
+                user.DeleteAt = DateTime.UtcNow;
+                _context.Set<User>().Update(user);
+
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al realizar el eliminado lógico del usuario con ID {UserId}", id);
+                return false;
+            }
+        }
+
+
+        /// <summary>
+        /// Restaura un usuario eliminado lógicamente (pone DeleteAt en null).
+        /// </summary>
+        /// <param name="id">ID del usuario a restaurar.</param>
+        /// <returns>True si la operación fue exitosa, False si no se encontró el usuario.</returns>
+        public async Task<bool> RestoreAsync(int id)
+        {
+            try
+            {
+                var user = await _context.Set<User>().FindAsync(id);
+                if (user == null)
+                    return false;
+
+                user.DeleteAt = null;
+                _context.Set<User>().Update(user);
+
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al restaurar el usuario con ID {UserId}", id);
+                return false;
+            }
+        }
+
     }
 }

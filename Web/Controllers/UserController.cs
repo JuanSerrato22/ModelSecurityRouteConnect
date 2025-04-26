@@ -142,5 +142,104 @@ namespace Web.Controllers
                 return StatusCode(500, new { message = ex.Message });
             }
         }
+
+        /// <summary>
+        /// Elimina un usuario existente por su ID
+        /// </summary>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(204)] // No Content
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            try
+            {
+                await _UserBusiness.DeleteUserAsync(id);
+                return NoContent(); // Eliminado exitosamente
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogWarning(ex, "Validación fallida al eliminar usuario con ID: {UserId}", id);
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (EntityNotFoundException ex)
+            {
+                _logger.LogInformation(ex, "Usuario no encontrado para eliminar con ID: {UserId}", id);
+                return NotFound(new { message = ex.Message });
+            }
+            catch (ExternalServiceException ex)
+            {
+                _logger.LogError(ex, "Error al eliminar usuario con ID: {UserId}", id);
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Elimina lógicamente un usuario del sistema
+        /// </summary>
+        [HttpDelete("softdelete/{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> SoftDeleteUser(int id)
+        {
+            try
+            {
+                var result = await _UserBusiness.SoftDeleteUserAsync(id);
+
+                if (!result)
+                {
+                    return NotFound(new { message = $"No se encontró un usuario con ID {id}" });
+                }
+
+                return NoContent(); // Eliminado lógico exitoso
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogWarning(ex, "Validación fallida al intentar eliminar lógicamente usuario");
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (ExternalServiceException ex)
+            {
+                _logger.LogError(ex, "Error al eliminar lógicamente usuario");
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Restaura un usuario eliminado lógicamente.
+        /// </summary>
+        [HttpPut("restore/{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> RestoreUser(int id)
+        {
+            try
+            {
+                var result = await _UserBusiness.RestoreUserAsync(id);
+
+                if (!result)
+                {
+                    return NotFound(new { message = $"No se encontró un usuario con ID {id}" });
+                }
+
+                return Ok(new { message = $"Usuario restaurado correctamente" });
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogWarning(ex, "Validación fallida al intentar restaurar usuario");
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (ExternalServiceException ex)
+            {
+                _logger.LogError(ex, "Error al restaurar usuario");
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+
     }
 }

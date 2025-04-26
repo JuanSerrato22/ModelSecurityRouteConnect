@@ -161,5 +161,91 @@ namespace Business
                 throw new ExternalServiceException("Base de datos", "Error al actualizar el usuario", ex);
             }
         }
+
+        // Método para eliminar un usuario por ID
+        public async Task<bool> DeleteUserAsync(int id)
+        {
+            if (id <= 0)
+            {
+                _logger.LogWarning("Se intentó eliminar un usuario con ID inválido: {UserId}", id);
+                throw new Utilities.Exceptions.ValidationException("id", "El ID del usuario debe ser mayor que cero");
+            }
+
+            try
+            {
+                var user = await _userData.GetByIdAsync(id);
+                if (user == null)
+                {
+                    _logger.LogInformation("No se encontró ningún usuario con ID: {UserId}", id);
+                    throw new EntityNotFoundException("Usuario", id);
+                }
+
+                var deleted = await _userData.DeleteAsync(id);
+
+                if (!deleted)
+                {
+                    _logger.LogError("Error al eliminar el usuario con ID: {UserId}", id);
+                    throw new ExternalServiceException("Base de datos", $"No se pudo eliminar el usuario con ID {id}");
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al eliminar el usuario con ID: {UserId}", id);
+                throw new ExternalServiceException("Base de datos", $"Error al eliminar el usuario con ID {id}", ex);
+            }
+        }
+
+        /// <summary>
+        /// Elimina lógicamente un usuario (soft delete).
+        /// </summary>
+        /// <param name="id">ID del usuario a eliminar lógicamente.</param>
+        /// <returns>True si se eliminó correctamente, False si no se encontró el usuario.</returns>
+        public async Task<bool> SoftDeleteUserAsync(int id)
+        {
+            if (id <= 0)
+            {
+                _logger.LogWarning("Se intentó eliminar lógicamente un usuario con ID inválido: {UserId}", id);
+                throw new Utilities.Exceptions.ValidationException("id", "El ID del usuario debe ser mayor que cero");
+            }
+
+            try
+            {
+                var result = await _userData.SoftDeleteAsync(id);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al realizar el eliminado lógico del usuario con ID: {UserId}", id);
+                throw new ExternalServiceException("Base de datos", "Error al eliminar lógicamente el usuario", ex);
+            }
+        }
+
+        /// <summary>
+        /// Restaura un usuario eliminado lógicamente.
+        /// </summary>
+        /// <param name="id">ID del usuario a restaurar.</param>
+        /// <returns>True si la restauración fue exitosa, False si no se encontró el usuario.</returns>
+        public async Task<bool> RestoreUserAsync(int id)
+        {
+            if (id <= 0)
+            {
+                _logger.LogWarning("Se intentó restaurar un usuario con ID inválido: {UserId}", id);
+                throw new Utilities.Exceptions.ValidationException("id", "El ID del usuario debe ser mayor que cero");
+            }
+
+            try
+            {
+                var result = await _userData.RestoreAsync(id);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al restaurar el usuario con ID: {UserId}", id);
+                throw new ExternalServiceException("Base de datos", "Error al restaurar el usuario", ex);
+            }
+        }
+
     }
 }
