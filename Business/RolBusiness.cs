@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using System.Diagnostics;
+using Data;
 using Entity.DTO;
 using Entity.Model;
 using Microsoft.Extensions.Logging;
@@ -90,6 +91,9 @@ namespace Business
                     RolName = RolDto.RolName,
                     Description = RolDto.Description
                 };
+
+                rol.CreateAt = DateTime.Now;
+
 
                 var rolCreado = await _rolData.CreateAsync(rol);
 

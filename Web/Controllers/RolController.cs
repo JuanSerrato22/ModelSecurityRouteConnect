@@ -34,9 +34,6 @@ namespace Web.Controllers
         /// <summary>
         /// Obtiene todos los roles del sistema
         /// </summary>
-        /// <returns>Lista de roles</returns>
-        /// <response code="200">Retorna la lista de roles</response>
-        /// <response code="500">Error interno del servidor</response>
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<RolDTO>), 200)]
         [ProducesResponseType(500)]
@@ -57,12 +54,6 @@ namespace Web.Controllers
         /// <summary>
         /// Obtiene un rol específico por su ID
         /// </summary>
-        /// <param name="id">ID del rol</param>
-        /// <returns>Rol solicitado</returns>
-        /// <response code="200">Retorna el rol solicitado</response>
-        /// <response code="400">ID proporcionado no válido</response>
-        /// <response code="404">Rol no encontrado</response>
-        /// <response code="500">Error interno del servidor</response>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(RolData), 200)]
         [ProducesResponseType(400)]
