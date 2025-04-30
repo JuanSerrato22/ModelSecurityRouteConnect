@@ -156,6 +156,7 @@ namespace Business
                 activityExistente.Description = ActivityDto.Description;
                 activityExistente.Category = ActivityDto.Category;
                 activityExistente.Price = ActivityDto.Price;
+                activityExistente.DurationHours = ActivityDto.DurationHours;
 
 
                 var activityActualizado = await _activityData.UpdateActivityAsync(activityExistente);
@@ -166,7 +167,8 @@ namespace Business
                     Name = activityActualizado.Name,
                     Description = activityActualizado.Description,
                     Category = activityActualizado.Category,
-                    Price = activityActualizado.Price
+                    Price = activityActualizado.Price,
+                    DurationHours = activityActualizado.DurationHours
 
                 };
             }
@@ -267,6 +269,9 @@ namespace Business
                 if (activityDto.Price > 0)
                     existingActivity.Price = activityDto.Price;
 
+                if (activityDto.DurationHours != default)
+                    existingActivity.DurationHours = activityDto.DurationHours;
+
                 var updatedActivity = await _activityData.UpdateActivityAsync(existingActivity);
 
                 return new ActivityDTO
@@ -275,7 +280,8 @@ namespace Business
                     Name = updatedActivity.Name,
                     Description = updatedActivity.Description,
                     Category = updatedActivity.Category,
-                    Price = updatedActivity.Price
+                    Price = updatedActivity.Price,
+                    DurationHours = updatedActivity.DurationHours
 
                 };
             }
