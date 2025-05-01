@@ -115,7 +115,7 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// Actualiza los datos de un usuario existente
+        /// Actualiza los datos de un rol existente
         /// </summary>
         [HttpPut("{id}")]
         [ProducesResponseType(typeof(RolDTO), 200)]
@@ -263,19 +263,19 @@ namespace Web.Controllers
 
                 if (updatedRol == null)
                 {
-                    return NotFound(new { message = $"No se encontró un usuario con ID {id}" });
+                    return NotFound(new { message = $"No se encontró un rol con ID {id}" });
                 }
 
                 return Ok(updatedRol);
             }
             catch (ValidationException ex)
             {
-                _logger.LogWarning(ex, "Validación fallida al modificar parte del usuario");
+                _logger.LogWarning(ex, "Validación fallida al modificar parte del rol");
                 return BadRequest(new { message = ex.Message });
             }
             catch (ExternalServiceException ex)
             {
-                _logger.LogError(ex, "Error al modificar parte del usuario");
+                _logger.LogError(ex, "Error al modificar parte del rol");
                 return StatusCode(500, new { message = ex.Message });
             }
         }
