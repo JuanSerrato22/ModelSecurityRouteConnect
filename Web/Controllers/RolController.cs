@@ -1,4 +1,5 @@
 using Business;
+using Business.Interfaces;
 using Data;
 using Entity.DTO;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ namespace Web.Controllers
     [Produces("application/json")]
     public class RolController : ControllerBase
     {
-        private readonly RolBusiness _RolBusiness;
+        private readonly RolService _RolBusiness;
         private readonly ILogger<RolController> _logger;
 
         /// <summary>
@@ -25,7 +26,7 @@ namespace Web.Controllers
         /// </summary>
         /// <param name="RolBusiness">Capa de negocio de roles</param>
         /// <param name="logger">Logger para registro de eventos</param>
-        public RolController(RolBusiness RolBusiness, ILogger<RolController> logger)
+        public RolController(RolService RolBusiness, ILogger<RolController> logger)
         {
             _RolBusiness = RolBusiness;
             _logger = logger;
@@ -41,7 +42,7 @@ namespace Web.Controllers
         {
             try
             {
-                var Rols = await _RolBusiness.GetAllRolesAsync();
+                var Rols = await _RolBusiness.GetAllRolAsync();
                 return Ok(Rols);
             }
             catch (ExternalServiceException ex)
@@ -261,7 +262,7 @@ namespace Web.Controllers
             {
                 var updatedRol = await _RolBusiness.PartialUpdateRolAsync(id, rolDto);
 
-                if (updatedRol == null)
+                if (!updatedRol)
                 {
                     return NotFound(new { message = $"No se encontró un rol con ID {id}" });
                 }

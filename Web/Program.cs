@@ -1,4 +1,5 @@
 using Business;
+using Business.Interfaces;
 using Data;
 using Entity.Context;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ builder.Services.AddSwaggerGen();
 
 // Registrar clases de Rol
 builder.Services.AddScoped<RolData>();
-builder.Services.AddScoped<RolBusiness>();
+builder.Services.AddScoped<RolService, RolBusiness>();
 
 // Registrar clases de Usuario
 builder.Services.AddScoped<UserData>();
