@@ -1,8 +1,10 @@
-﻿namespace Entity.DTO
+﻿
+using Entity.Model.Base;
+
+namespace Entity.DTO
 {
-    public class RolDTO
+    public class RolDTO : BaseEntity
     {
-        public int RolId { get; set; }
         public string? RolName { get; set; }
         public string? Description { get; set; }
     }

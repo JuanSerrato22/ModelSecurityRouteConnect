@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entity.Model.Base;
+
 
 namespace Entity.DTO
 {
-    public class ChangeLogDTO
+    public class ChangeLogDTO : BaseEntity
     {
-        public int ChangeLogId { get; set; }
         public string Description { get; set; }
         public DateTime ChangeDate { get; set; }
     }

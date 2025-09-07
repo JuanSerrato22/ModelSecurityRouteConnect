@@ -1,10 +1,11 @@
 using System;
+using Entity.Model.Base;
+
 
 namespace Entity.Model
 {
-    public class Person
+    public class Person : BaseEntity
     {
-        public int PersonId { get; set; }
         public required string FirstName { get; set; }
         public required string LastName { get; set; }
         public int Document { get; set; }

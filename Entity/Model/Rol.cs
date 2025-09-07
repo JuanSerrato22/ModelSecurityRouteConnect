@@ -1,12 +1,13 @@
-﻿namespace Entity.Model
+﻿
+using Entity.Model.Base;
+
+
+namespace Entity.Model
 {
-    public class Rol
+    public class Rol : BaseEntity
     {
-        public int RolId { get; set; }
         public string? RolName { get; set; }
         public string? Description { get; set; }
-        public DateTime? DeleteAt { get; set; }
-        public DateTime? CreateAt { get; set; }
 
     }
 }

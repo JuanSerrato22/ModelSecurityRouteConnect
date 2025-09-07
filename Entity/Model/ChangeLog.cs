@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entity.Model.Base;
+
 
 namespace Entity.Model
 {
-    public class ChangeLog
+    public class ChangeLog : BaseEntity
     {
         public int ChangeLogId { get; set; }
         public string Description { get; set; }

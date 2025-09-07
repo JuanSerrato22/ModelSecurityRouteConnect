@@ -1,11 +1,12 @@
-﻿namespace Entity.Model
+﻿
+using Entity.Model.Base;
+
+
+namespace Entity.Model
 {
-    public class Permission    
+    public class Permission : BaseEntity
     {
-        public int PermissionId { get; set; }
         public required string PermissionName { get; set; }
         public string? Description { get; set; }
-        public string? DeleteAt { get; set; }
-        public string? CreateAt { get; set; }
     }
 }

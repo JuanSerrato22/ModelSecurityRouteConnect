@@ -1,10 +1,11 @@
 using System;
+using Entity.Model.Base;
+
 
 namespace Entity.DTO
 {
-    public class PersonDTO
+    public class PersonDTO : BaseEntity
     {
-        public int PersonId { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public int Document { get; set; }

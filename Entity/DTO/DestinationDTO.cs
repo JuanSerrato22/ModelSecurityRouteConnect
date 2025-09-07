@@ -1,8 +1,11 @@
+
+using Entity.Model.Base;
+
+
 namespace Entity.DTO
 {
-    public class DestinationDTO
+    public class DestinationDTO : BaseEntity
     {
-        public int DestinationId { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
         public string? Country { get; set; }

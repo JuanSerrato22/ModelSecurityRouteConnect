@@ -1,12 +1,12 @@
+
+using Entity.Model.Base;
+
+
 namespace Entity.Model
 {
-    public class Module
+    public class Module : BaseEntity
     {
-        public int ModuleId { get; set; }
         public int Code { get; set; }
         public required string Name { get; set; }
-        public bool Active { get; set; }
-        public string? DeleteAt { get; set; }  
-        public string? CreateAt { get; set; }
     }
 }

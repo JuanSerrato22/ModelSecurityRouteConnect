@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entity.Model.Base;
+
 
 namespace Entity.DTO
 {
-    public class RolFormPermissionDTO
+    public class RolFormPermissionDTO : BaseEntity
     {
-        public int RolFormPermissionId { get; set; }
         public string Name { get; set; }
     }
 }
