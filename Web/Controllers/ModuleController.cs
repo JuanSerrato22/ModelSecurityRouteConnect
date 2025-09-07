@@ -1,110 +1,58 @@
-﻿using Business;
-using Data;
-using Entity.DTO;
+﻿using Business.Interfaces;
+using Entity.Dtos.ClientDTO;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Utilities.Exceptions;
+using Web.Controllers.Interface;
 
-namespace Web.Controllers
+namespace Web.Controllers.Implements
 {
-    /// <summary>
-    /// Controlador para la gestión de modulos en el sistema
-    /// </summary>
-    [Route("api/[controller]")]
     [ApiController]
-    [Produces("application/json")]
-    public class ModuleController : ControllerBase
+    [Route("api/[controller]")]
+    public class ClientesController : ControllerBase, IClientesController
     {
-        private readonly ModuleBusiness _ModuleBusiness;
-        private readonly ILogger<ModuleController> _logger;
+        private readonly IClienteService _clienteService;
 
-        /// <summary>
-        /// Constructor del controlador de modulos
-        /// </summary>
-        public ModuleController(ModuleBusiness ModuleBusiness, ILogger<ModuleController> logger)
+        public ClientesController(IClienteService clienteService)
         {
-            _ModuleBusiness = ModuleBusiness;
-            _logger = logger;
+            _clienteService = clienteService;
         }
 
-        /// <summary>
-        /// Obtiene todos los modulos del sistema
-        /// </summary>
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<ModuleDTO>), 200)]
-        [ProducesResponseType(500)]
-        public async Task<IActionResult> GetAllModules()
+        public async Task<IActionResult> GetAll()
         {
-            try
-            {
-                var modules = await _ModuleBusiness.GetAllModulesAsync();
-                return Ok(modules);
-            }
-            catch (ExternalServiceException ex)
-            {
-                _logger.LogError(ex, "Error al obtener modulos");
-                return StatusCode(500, new { message = ex.Message });
-            }
+            var clientes = await _clienteService.GetAllAsync();
+            return Ok(clientes);
         }
 
-        /// <summary>
-        /// Obtiene un modulo específico por su ID
-        /// </summary>
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(ModuleDTO), 200)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(404)]
-        [ProducesResponseType(500)]
-        public async Task<IActionResult> GetModuleById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            try
-            {
-                var module = await _ModuleBusiness.GetModuleByIdAsync(id);
-                return Ok(module);
-            }
-            catch (ValidationException ex)
-            {
-                _logger.LogWarning(ex, "Validación fallida para modulo con ID: {ModuleId}", id);
-                return BadRequest(new { message = ex.Message });
-            }
-            catch (EntityNotFoundException ex)
-            {
-                _logger.LogInformation(ex, "Modulo no encontrado con ID: {ModuleId}", id);
-                return NotFound(new { message = ex.Message });
-            }
-            catch (ExternalServiceException ex)
-            {
-                _logger.LogError(ex, "Error al obtener modulo con ID: {ModuleId}", id);
-                return StatusCode(500, new { message = ex.Message });
-            }
+            var cliente = await _clienteService.GetByIdAsync(id);
+            if (cliente == null) return NotFound();
+            return Ok(cliente);
         }
 
-        /// <summary>
-        /// Crea un nuevo modulo en el sistema
-        /// </summary>
         [HttpPost]
-        [ProducesResponseType(typeof(ModuleDTO), 201)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(500)]
-        public async Task<IActionResult> CreateModule([FromBody] ModuleDTO ModuleDto)
+        public async Task<IActionResult> Create([FromBody] ClientDto clienteDto)
         {
-            try
-            {
-                var createdModule = await _ModuleBusiness.CreateModuleAsync(ModuleDto);
-                return CreatedAtAction(nameof(GetModuleById), new { id = createdModule.ModuleId }, createdModule);
-            }
-            catch (ValidationException ex)
-            {
-                _logger.LogWarning(ex, "Validación fallida al crear modulo");
-                return BadRequest(new { message = ex.Message });
-            }
-            catch (ExternalServiceException ex)
-            {
-                _logger.LogError(ex, "Error al crear modulo");
-                return StatusCode(500, new { message = ex.Message });
-            }
+            var created = await _clienteService.CreateAsync(clienteDto);
+            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] ClientDto clienteDto)
+        {
+            var updated = await _clienteService.UpdateAsync(id, clienteDto);
+            if (updated == null) return NotFound();
+            return Ok(updated);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var deleted = await _clienteService.DeleteAsync(id);
+            if (!deleted) return NotFound();
+            return NoContent();
         }
     }
 }
