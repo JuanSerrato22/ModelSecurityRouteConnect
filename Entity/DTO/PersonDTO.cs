@@ -4,8 +4,9 @@ using Entity.Model.Base;
 
 namespace Entity.DTO
 {
-    public class PersonDTO : BaseEntity
+    public class PersonDTO
     {
+        public int Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public int Document { get; set; }

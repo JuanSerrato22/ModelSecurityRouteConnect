@@ -7,8 +7,9 @@ using Entity.Model.Base;
 
 namespace Entity.DTO
 {
-    public class RolPermissionDTO : BaseEntity
+    public class RolPermissionDTO
     {
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

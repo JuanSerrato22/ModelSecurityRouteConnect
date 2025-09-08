@@ -8,8 +8,9 @@ using Entity.Model.Base;
 
 namespace Entity.DTO
 {
-    public class DestinationActivityDTO : BaseEntity
+    public class DestinationActivityDTO
     {
+        public int Id { get; set; }
         public int DestinationId { get; set; }
         public int ActivityId { get; set; }
     }
