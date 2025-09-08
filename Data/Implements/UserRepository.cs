@@ -24,7 +24,7 @@ namespace Data.Implements
 
         public async Task<User> GetByIdAsync(int id)
         {
-            var user = await _context.User.FirstOrDefaultAsync(c => c.UserId == id);
+            var user = await _context.User.FirstOrDefaultAsync(c => c.Id == id);
             if (user == null)
                 throw new InvalidOperationException($"No se encontró un Usuario con el id {id}.");
             return user;

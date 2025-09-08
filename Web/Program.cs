@@ -1,8 +1,13 @@
 using Business;
+using Business.Implements;
 using Business.Interfaces;
 using Data;
+using Data.Implements;
+using Data.Interfaces;
 using Entity.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,41 +17,45 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-// Registrar clases de Rol
-builder.Services.AddScoped<RolData>();
-builder.Services.AddScoped<RolService, RolBusiness>();
+// Registrar repositorios (Data)
+builder.Services.AddScoped<IActivityRepository, ActivityRepository>();
+builder.Services.AddScoped<IChangeLogRepository, ChangeLogRepository>();
+builder.Services.AddScoped<IDestinationActivityRepository, DestinationActivityRepository>();
+builder.Services.AddScoped<IDestinationRepository, DestinationRepository>();
+builder.Services.AddScoped<IFormModuleRepository, FormModuleRepository>();
+builder.Services.AddScoped<IFormRepository, FormRepository>();
+builder.Services.AddScoped<IModuleRepository, ModuleRepository>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+builder.Services.AddScoped<IPermissionRepository, PermissionRepository>();
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<IRolFormPermissionRepository, RolFormPermissionRepository>();
+builder.Services.AddScoped<IRolPermissionRepository, RolPermissionRepository>();
+builder.Services.AddScoped<IRolRepository, RolRepository>();
+builder.Services.AddScoped<IUserActivityRepository, UserActivityRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserRolRepository, UserRolRepository>();
 
-// Registrar clases de Usuario
-builder.Services.AddScoped<UserData>();
-builder.Services.AddScoped<UserBusiness>();
 
-// Registrar clases de Persona
-builder.Services.AddScoped<PersonData>();
-builder.Services.AddScoped<PersonBusiness>();
+// Registrar servicios (Business)
+builder.Services.AddScoped<IActivityService, ActivityService>();
+builder.Services.AddScoped<IChangeLogService, ChangeLogService>();
+builder.Services.AddScoped<IDestinationActivityService, DestinationActivityService>();
+builder.Services.AddScoped<IDestinationService, DestinationService>();
+builder.Services.AddScoped<IFormModuleService, FormModuleService>();
+builder.Services.AddScoped<IFormService, FormService>();
+builder.Services.AddScoped<IModuleService, ModuleService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IPermissionService, PermissionService>();
+builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<IRolFormPermissionService, RolFormPermissionService>();
+builder.Services.AddScoped<IRolPermissionService, RolPermissionService>();
+builder.Services.AddScoped<IRolService, RolService>();
+builder.Services.AddScoped<IUserActivityService, UserActivityService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRolService, UserRolService>();
 
-// Registrar clases de Permiso
-builder.Services.AddScoped<PermissionData>();
-builder.Services.AddScoped<PermissionBusiness>();
 
-// Registrar clases de Pago
-builder.Services.AddScoped<PaymentData>();
-builder.Services.AddScoped<PaymentBusiness>();
-
-// Registrar clases de Modulo
-builder.Services.AddScoped<ModuleData>();
-builder.Services.AddScoped<ModuleBusiness>();
-
-// Registrar clases de Formulario
-builder.Services.AddScoped<FormData>();
-builder.Services.AddScoped<FormBusiness>();
-
-// Registrar clases de Destino
-builder.Services.AddScoped<DestinationData>();
-builder.Services.AddScoped<DestinationBusiness>();
-
-// Registrar clases de Actividad
-builder.Services.AddScoped<ActivityData>();
-builder.Services.AddScoped<ActivityBusiness>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 // Agregar CORS

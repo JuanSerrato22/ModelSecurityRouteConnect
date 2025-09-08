@@ -24,9 +24,9 @@ namespace Data.Implements
 
         public async Task<Payment> GetByIdAsync(int id)
         {
-            var payment = await _context.Payment.FirstOrDefaultAsync(c => c.PaymentId == id);
+            var payment = await _context.Payment.FirstOrDefaultAsync(c => c.Id == id);
             if (payment == null)
-                throw new InvalidOperationException($"No se encontró un Payment con el id {id}.");
+                throw new InvalidOperationException($"No se encontró un Pago con el id {id}.");
             return payment;
         }
 

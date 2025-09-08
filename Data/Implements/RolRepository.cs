@@ -24,7 +24,7 @@ namespace Data.Implements
 
         public async Task<Rol> GetByIdAsync(int id)
         {
-            var rol = await _context.Rol.FirstOrDefaultAsync(c => c.RolId == id);
+            var rol = await _context.Rol.FirstOrDefaultAsync(c => c.Id == id);
             if (rol == null)
                 throw new InvalidOperationException($"No se encontró un Rol con el id {id}.");
             return rol;

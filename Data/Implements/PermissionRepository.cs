@@ -24,9 +24,9 @@ namespace Data.Implements
 
         public async Task<Permission> GetByIdAsync(int id)
         {
-            var permission = await _context.Permission.FirstOrDefaultAsync(c => c.PermissionId == id);
+            var permission = await _context.Permission.FirstOrDefaultAsync(c => c.Id == id);
             if (permission == null)
-                throw new InvalidOperationException($"No se encontró un Permission con el id {id}.");
+                throw new InvalidOperationException($"No se encontró un Permiso con el id {id}.");
             return permission;
         }
 

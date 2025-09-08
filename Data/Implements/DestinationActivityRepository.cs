@@ -24,7 +24,7 @@ namespace Data.Implements
 
         public async Task<DestinationActivity> GetByIdAsync(int id)
         {
-            var destinationActivity = await _context.DestinationActivity.FirstOrDefaultAsync(c => c.DestinationActivityId == id);
+            var destinationActivity = await _context.DestinationActivity.FirstOrDefaultAsync(c => c.Id == id);
             if (destinationActivity == null)
                 throw new InvalidOperationException($"No se encontró un DestinationActivity con el id {id}.");
             return destinationActivity;

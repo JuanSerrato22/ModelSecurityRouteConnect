@@ -24,9 +24,9 @@ namespace Data.Implements
 
         public async Task<Person> GetByIdAsync(int id)
         {
-            var person = await _context.Person.FirstOrDefaultAsync(c => c.PersonId == id);
+            var person = await _context.Person.FirstOrDefaultAsync(c => c.Id == id);
             if (person == null)
-                throw new InvalidOperationException($"No se encontró un Person con el id {id}.");
+                throw new InvalidOperationException($"No se encontró una Persona con el id {id}.");
             return person;
         }
 

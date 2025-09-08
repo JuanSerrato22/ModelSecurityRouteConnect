@@ -24,7 +24,7 @@ namespace Data.Implements
 
         public async Task<FormModule> GetByIdAsync(int id)
         {
-            var formModule = await _context.FormModule.FirstOrDefaultAsync(c => c.FormModuleId == id);
+            var formModule = await _context.FormModule.FirstOrDefaultAsync(c => c.Id == id);
             if (formModule == null)
                 throw new InvalidOperationException($"No se encontró un FormModule con el id {id}.");
             return formModule;

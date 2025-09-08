@@ -24,9 +24,9 @@ namespace Data.Implements
 
         public async Task<Module> GetByIdAsync(int id)
         {
-            var module = await _context.Module.FirstOrDefaultAsync(c => c.ModuleId == id);
+            var module = await _context.Module.FirstOrDefaultAsync(c => c.Id == id);
             if (module == null)
-                throw new InvalidOperationException($"No se encontró un Module con el id {id}.");
+                throw new InvalidOperationException($"No se encontró un Módulo con el id {id}.");
             return module;
         }
 

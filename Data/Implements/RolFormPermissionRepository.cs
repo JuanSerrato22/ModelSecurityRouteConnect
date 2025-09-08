@@ -24,7 +24,7 @@ namespace Data.Implements
 
         public async Task<RolFormPermission> GetByIdAsync(int id)
         {
-            var rolFormPermission = await _context.RolFormPermission.FirstOrDefaultAsync(c => c.RolFormPermissionId == id);
+            var rolFormPermission = await _context.RolFormPermission.FirstOrDefaultAsync(c => c.Id == id);
             if (rolFormPermission == null)
                 throw new InvalidOperationException($"No se encontró un RolFormPermission con el id {id}.");
             return rolFormPermission;
