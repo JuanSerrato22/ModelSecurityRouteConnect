@@ -75,9 +75,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(opciones =>
 
 var app = builder.Build();
 
-// Agregar DbContext
-//builder.Services.AddDbContext<ApplicationDbContext>(opciones =>
-//    opciones.UseSqlServer("name=DefaultConnection"));
+// aplicar migraciones automáticamente
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
+}
 
 
 // Configure the HTTP request pipeline.
