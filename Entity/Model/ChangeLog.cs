@@ -8,10 +8,10 @@ using Entity.Model.Base;
 
 namespace Entity.Model
 {
-    public class ChangeLog : BaseEntity
+    public class ChangeLog : GenericModel
     {
         public int ChangeLogId { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public DateTime ChangeDate { get; set; }
     }
 }

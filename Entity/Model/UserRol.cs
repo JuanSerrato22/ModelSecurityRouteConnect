@@ -8,8 +8,8 @@ using Entity.Model.Base;
 
 namespace Entity.Model
 {
-    public class UserRol : BaseEntity
+    public class UserRol : GenericModel
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Business.Interfaces;
+﻿using Business.Implements;
+using Business.Interfaces;
 using Entity.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -45,6 +46,36 @@ namespace Web.Controllers.Implements
             var updated = await _permissionService.UpdateAsync(id, permissionDto);
             if (updated == null) return NotFound();
             return Ok(updated);
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdatePartial(int id, [FromBody] PermissionDTO permissionDto)
+        {
+            if (permissionDto == null) return BadRequest();
+
+            // Obtener la permissiona existente
+            var permission = await _permissionService.GetByIdAsync(id);
+            if (permission == null) return NotFound();
+
+            // Actualizar solo los campos que vienen distintos de null
+            var updatedPermission = new PermissionDTO
+            {
+                Id = permission.Id,
+                PermissionName = permissionDto.PermissionName ?? permission.PermissionName,
+                Description = permissionDto.Description ?? permission.Description
+            };
+
+            var updated = await _permissionService.UpdateAsync(id, updatedPermission);
+            return Ok(updated);
+        }
+
+
+        [HttpDelete("soft/{id}")]
+        public async Task<IActionResult> SoftDelete(int id)
+        {
+            var deleted = await _permissionService.SoftDeleteAsync(id);
+            if (!deleted) return NotFound();
+            return NoContent();
         }
 
         [HttpDelete("{id}")]

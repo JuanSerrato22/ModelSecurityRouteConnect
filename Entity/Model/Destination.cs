@@ -4,7 +4,7 @@ using Entity.Model.Base;
 
 namespace Entity.Model
 {
-    public class Destination : BaseEntity
+    public class Destination : GenericModel
     {
         public string? Name { get; set; }
         public string? Description { get; set; }

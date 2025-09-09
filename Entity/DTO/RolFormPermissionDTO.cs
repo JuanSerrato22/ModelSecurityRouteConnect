@@ -11,6 +11,6 @@ namespace Entity.DTO
     public class RolFormPermissionDTO
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

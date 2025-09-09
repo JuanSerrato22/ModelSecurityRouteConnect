@@ -8,9 +8,9 @@ using Entity.Model.Base;
 
 namespace Entity.Model
 {
-    public class UserActivity : BaseEntity
+    public class UserActivity : GenericModel
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }
 

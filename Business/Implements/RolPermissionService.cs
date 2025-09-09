@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Business.Interfaces;
+using Data.Implements;
 using Data.Interfaces;
-using Entity.Model;
 using Entity.DTO;
+using Entity.Model;
+using Microsoft.AspNetCore.JsonPatch;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -47,6 +49,40 @@ namespace Business.Implements
 
             var actualizado = await _rolPermissionRepository.UpdateAsync(rolPermission);
             return _mapper.Map<RolPermissionDTO>(actualizado);
+        }
+
+        public async Task<RolPermissionDTO> UpdatePartialAsync(int id, JsonPatchDocument<RolPermissionDTO> patchDoc)
+        {
+            var rolPermission = await _rolPermissionRepository.GetByIdAsync(id);
+            if (rolPermission == null) return null!;
+
+            var rolPermissionDto = _mapper.Map<RolPermissionDTO>(rolPermission);
+            patchDoc.ApplyTo(rolPermissionDto);
+
+            // Mapea de nuevo a la entidad y actualiza
+            _mapper.Map(rolPermissionDto, rolPermission);
+            var updated = await _rolPermissionRepository.UpdateAsync(rolPermission);
+            return _mapper.Map<RolPermissionDTO>(updated);
+        }
+
+        public async Task<bool> SoftDeleteAsync(int id)
+        {
+            var rolPermission = await _rolPermissionRepository.GetByIdAsync(id);
+            if (rolPermission == null) return false;
+
+            if (rolPermission.Active)
+            {
+                rolPermission.Active = false;
+                rolPermission.DeleteAt = DateTime.Now;
+            }
+            else
+            {
+                rolPermission.Active = true;
+                rolPermission.DeleteAt = null;
+            }
+
+            await _rolPermissionRepository.UpdateAsync(rolPermission);
+            return true;
         }
 
         public async Task<bool> DeleteAsync(int id)

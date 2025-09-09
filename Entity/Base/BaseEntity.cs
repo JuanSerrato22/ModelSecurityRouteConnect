@@ -11,14 +11,14 @@ namespace Entity.Model.Base
         // Constructor para inicializar CreatedAt
         protected BaseEntity()
         {
-            CreatedAt = DateTime.UtcNow;
+            CreatedAt = DateTime.Now;
             DeleteAt = null;
         }
 
         // Método de soft delete
         public void SoftDelete()
         {
-            DeleteAt = DateTime.UtcNow;
+            DeleteAt = DateTime.Now;
         }
 
         // Reactivar

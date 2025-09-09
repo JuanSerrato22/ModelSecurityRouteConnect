@@ -74,8 +74,16 @@ namespace Business.Implements
             var person = await _personRepository.GetByIdAsync(id);
             if (person == null) return false;
 
-            person.Active = false;
-            person.DeleteAt = DateTime.Now;
+            if (person.Active)  
+            {
+                person.Active = false;
+                person.DeleteAt = DateTime.Now;
+            }
+            else
+            {
+                person.Active = true;
+                person.DeleteAt = null;
+            }
 
             await _personRepository.UpdateAsync(person);
             return true;

@@ -8,9 +8,9 @@ using Entity.Model.Base;
 
 namespace Entity.Model
 {
-    public class RolFormPermission : BaseEntity
+    public class RolFormPermission : GenericModel
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }
 

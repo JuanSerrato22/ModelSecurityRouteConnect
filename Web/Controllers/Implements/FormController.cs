@@ -1,4 +1,5 @@
-﻿using Business.Interfaces;
+﻿using Business.Implements;
+using Business.Interfaces;
 using Entity.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -45,6 +46,35 @@ namespace Web.Controllers.Implements
             var updated = await _formService.UpdateAsync(id, formDto);
             if (updated == null) return NotFound();
             return Ok(updated);
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdatePartial(int id, [FromBody] FormDTO formDto)
+        {
+            if (formDto == null) return BadRequest();
+
+            // Obtener la forma existente
+            var form = await _formService.GetByIdAsync(id);
+            if (form == null) return NotFound();
+
+            // Actualizar solo los campos que vienen distintos de null
+            var updatedForm = new FormDTO
+            {
+                Id = form.Id,
+                Name = formDto.Name ?? form.Name
+            };
+
+            var updated = await _formService.UpdateAsync(id, updatedForm);
+            return Ok(updated);
+        }
+
+
+        [HttpDelete("soft/{id}")]
+        public async Task<IActionResult> SoftDelete(int id)
+        {
+            var deleted = await _formService.SoftDeleteAsync(id);
+            if (!deleted) return NotFound();
+            return NoContent();
         }
 
         [HttpDelete("{id}")]

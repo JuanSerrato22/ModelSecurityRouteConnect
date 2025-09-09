@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Business.Interfaces;
+using Data.Implements;
 using Data.Interfaces;
-using Entity.Model;
 using Entity.DTO;
+using Entity.Model;
+using Microsoft.AspNetCore.JsonPatch;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -47,6 +49,40 @@ namespace Business.Implements
 
             var actualizado = await _changelogRepository.UpdateAsync(changelog);
             return _mapper.Map<ChangeLogDTO>(actualizado);
+        }
+
+        public async Task<ChangeLogDTO> UpdatePartialAsync(int id, JsonPatchDocument<ChangeLogDTO> patchDoc)
+        {
+            var changeLog = await _changelogRepository.GetByIdAsync(id);
+            if (changeLog == null) return null!;
+
+            var changeLogDto = _mapper.Map<ChangeLogDTO>(changeLog);
+            patchDoc.ApplyTo(changeLogDto);
+
+            // Mapea de nuevo a la entidad y actualiza
+            _mapper.Map(changeLogDto, changeLog);
+            var updated = await _changelogRepository.UpdateAsync(changeLog);
+            return _mapper.Map<ChangeLogDTO>(updated);
+        }
+
+        public async Task<bool> SoftDeleteAsync(int id)
+        {
+            var changeLog = await _changelogRepository.GetByIdAsync(id);
+            if (changeLog == null) return false;
+
+            if (changeLog.Active)
+            {
+                changeLog.Active = false;
+                changeLog.DeleteAt = DateTime.Now;
+            }
+            else
+            {
+                changeLog.Active = true;
+                changeLog.DeleteAt = null;
+            }
+
+            await _changelogRepository.UpdateAsync(changeLog);
+            return true;
         }
 
         public async Task<bool> DeleteAsync(int id)

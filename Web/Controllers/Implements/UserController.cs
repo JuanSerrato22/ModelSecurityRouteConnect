@@ -1,4 +1,5 @@
-﻿using Business.Interfaces;
+﻿using Business.Implements;
+using Business.Interfaces;
 using Entity.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -45,6 +46,37 @@ namespace Web.Controllers.Implements
             var updated = await _userService.UpdateAsync(id, userDto);
             if (updated == null) return NotFound();
             return Ok(updated);
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdatePartial(int id, [FromBody] UserDTO userDto)
+        {
+            if (userDto == null) return BadRequest();
+
+            // Obtener la usera existente
+            var user = await _userService.GetByIdAsync(id);
+            if (user == null) return NotFound();
+
+            // Actualizar solo los campos que vienen distintos de null
+            var updatedUser = new UserDTO
+            {
+                Id = user.Id,
+                Username = userDto.Username ?? user.Username,
+                Email = userDto.Email ?? user.Email,
+                Password = userDto.Password ?? user.Password
+            };
+
+            var updated = await _userService.UpdateAsync(id, updatedUser);
+            return Ok(updated);
+        }
+
+
+        [HttpDelete("soft/{id}")]
+        public async Task<IActionResult> SoftDelete(int id)
+        {
+            var deleted = await _userService.SoftDeleteAsync(id);
+            if (!deleted) return NotFound();
+            return NoContent();
         }
 
         [HttpDelete("{id}")]

@@ -10,6 +10,8 @@ namespace Web.Controllers.Interface
         Task<IActionResult> GetAll();
         Task<IActionResult> GetById(int id);
         Task<IActionResult> Create(DestinationActivityDTO destinationActivityDto);
+        Task<IActionResult> UpdatePartial(int id, DestinationActivityDTO destinationActivityDto);
+        Task<IActionResult> SoftDelete(int id);
         Task<IActionResult> Delete(int id);
     }
 }

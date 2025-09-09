@@ -1,4 +1,5 @@
-﻿using Business.Interfaces;
+﻿using Business.Implements;
+using Business.Interfaces;
 using Entity.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -45,6 +46,35 @@ namespace Web.Controllers.Implements
             var updated = await _moduleService.UpdateAsync(id, moduleDto);
             if (updated == null) return NotFound();
             return Ok(updated);
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdatePartial(int id, [FromBody] ModuleDTO moduleDto)
+        {
+            if (moduleDto == null) return BadRequest();
+
+            // Obtener la modulea existente
+            var module = await _moduleService.GetByIdAsync(id);
+            if (module == null) return NotFound();
+
+            // Actualizar solo los campos que vienen distintos de null
+            var updatedModule = new ModuleDTO
+            {
+                Id = module.Id,
+                Name = moduleDto.Name ?? module.Name
+            };
+
+            var updated = await _moduleService.UpdateAsync(id, updatedModule);
+            return Ok(updated);
+        }
+
+
+        [HttpDelete("soft/{id}")]
+        public async Task<IActionResult> SoftDelete(int id)
+        {
+            var deleted = await _moduleService.SoftDeleteAsync(id);
+            if (!deleted) return NotFound();
+            return NoContent();
         }
 
         [HttpDelete("{id}")]

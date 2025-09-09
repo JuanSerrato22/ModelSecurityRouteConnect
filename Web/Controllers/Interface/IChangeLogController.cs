@@ -11,6 +11,8 @@ namespace Web.Controllers.Interface
         Task<IActionResult> GetById(int id);
         Task<IActionResult> Create(ChangeLogDTO changeLogDto);
         Task<IActionResult> Update(int id, ChangeLogDTO changeLogDto);
+        Task<IActionResult> UpdatePartial(int id, ChangeLogDTO changeLogDto);
+        Task<IActionResult> SoftDelete(int id);
         Task<IActionResult> Delete(int id);
     }
 }

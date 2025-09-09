@@ -3,7 +3,7 @@ using Entity.Model.Base;
 
 namespace Entity.Model
 {
-    public class Activity : BaseEntity
+    public class Activity : GenericModel
     {
         public string? Name { get; set; }
         public string? Description { get; set; }

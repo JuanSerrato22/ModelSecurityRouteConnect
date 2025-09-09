@@ -1,8 +1,10 @@
 using AutoMapper;
 using Business.Interfaces;
+using Data.Implements;
 using Data.Interfaces;
-using Entity.Model;
 using Entity.DTO;
+using Entity.Model;
+using Microsoft.AspNetCore.JsonPatch;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -48,6 +50,40 @@ namespace Business.Implements
 
             var actualizado = await _rolRepository.UpdateAsync(rol);
             return _mapper.Map<RolDTO>(actualizado);
+        }
+
+        public async Task<RolDTO> UpdatePartialAsync(int id, JsonPatchDocument<RolDTO> patchDoc)
+        {
+            var rol = await _rolRepository.GetByIdAsync(id);
+            if (rol == null) return null!;
+
+            var rolDto = _mapper.Map<RolDTO>(rol);
+            patchDoc.ApplyTo(rolDto);
+
+            // Mapea de nuevo a la entidad y actualiza
+            _mapper.Map(rolDto, rol);
+            var updated = await _rolRepository.UpdateAsync(rol);
+            return _mapper.Map<RolDTO>(updated);
+        }
+
+        public async Task<bool> SoftDeleteAsync(int id)
+        {
+            var rol = await _rolRepository.GetByIdAsync(id);
+            if (rol == null) return false;
+
+            if (rol.Active)
+            {
+                rol.Active = false;
+                rol.DeleteAt = DateTime.Now;
+            }
+            else
+            {
+                rol.Active = true;
+                rol.DeleteAt = null;
+            }
+
+            await _rolRepository.UpdateAsync(rol);
+            return true;
         }
 
         public async Task<bool> DeleteAsync(int id)

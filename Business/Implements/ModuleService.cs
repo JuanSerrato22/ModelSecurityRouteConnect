@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Business.Interfaces;
+using Data.Implements;
 using Data.Interfaces;
-using Entity.Model;
 using Entity.DTO;
+using Entity.Model;
+using Microsoft.AspNetCore.JsonPatch;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -47,6 +49,40 @@ namespace Business.Implements
 
             var actualizado = await _moduleRepository.UpdateAsync(module);
             return _mapper.Map<ModuleDTO>(actualizado);
+        }
+
+        public async Task<ModuleDTO> UpdatePartialAsync(int id, JsonPatchDocument<ModuleDTO> patchDoc)
+        {
+            var module = await _moduleRepository.GetByIdAsync(id);
+            if (module == null) return null!;
+
+            var moduleDto = _mapper.Map<ModuleDTO>(module);
+            patchDoc.ApplyTo(moduleDto);
+
+            // Mapea de nuevo a la entidad y actualiza
+            _mapper.Map(moduleDto, module);
+            var updated = await _moduleRepository.UpdateAsync(module);
+            return _mapper.Map<ModuleDTO>(updated);
+        }
+
+        public async Task<bool> SoftDeleteAsync(int id)
+        {
+            var module = await _moduleRepository.GetByIdAsync(id);
+            if (module == null) return false;
+
+            if (module.Active)
+            {
+                module.Active = false;
+                module.DeleteAt = DateTime.Now;
+            }
+            else
+            {
+                module.Active = true;
+                module.DeleteAt = null;
+            }
+
+            await _moduleRepository.UpdateAsync(module);
+            return true;
         }
 
         public async Task<bool> DeleteAsync(int id)

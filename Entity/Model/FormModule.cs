@@ -8,9 +8,9 @@ using Entity.Model.Base;
 
 namespace Entity.Model
 {
-    public class FormModule : BaseEntity
+    public class FormModule : GenericModel
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }
 

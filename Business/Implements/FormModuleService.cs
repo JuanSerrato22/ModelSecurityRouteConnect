@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Business.Interfaces;
+using Data.Implements;
 using Data.Interfaces;
-using Entity.Model;
 using Entity.DTO;
+using Entity.Model;
+using Microsoft.AspNetCore.JsonPatch;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -47,6 +49,40 @@ namespace Business.Implements
 
             var actualizado = await _formModuleRepository.UpdateAsync(formModule);
             return _mapper.Map<FormModuleDTO>(actualizado);
+        }
+
+        public async Task<FormModuleDTO> UpdatePartialAsync(int id, JsonPatchDocument<FormModuleDTO> patchDoc)
+        {
+            var formModule = await _formModuleRepository.GetByIdAsync(id);
+            if (formModule == null) return null!;
+
+            var formModuleDto = _mapper.Map<FormModuleDTO>(formModule);
+            patchDoc.ApplyTo(formModuleDto);
+
+            // Mapea de nuevo a la entidad y actualiza
+            _mapper.Map(formModuleDto, formModule);
+            var updated = await _formModuleRepository.UpdateAsync(formModule);
+            return _mapper.Map<FormModuleDTO>(updated);
+        }
+
+        public async Task<bool> SoftDeleteAsync(int id)
+        {
+            var formModule = await _formModuleRepository.GetByIdAsync(id);
+            if (formModule == null) return false;
+
+            if (formModule.Active)
+            {
+                formModule.Active = false;
+                formModule.DeleteAt = DateTime.Now;
+            }
+            else
+            {
+                formModule.Active = true;
+                formModule.DeleteAt = null;
+            }
+
+            await _formModuleRepository.UpdateAsync(formModule);
+            return true;
         }
 
         public async Task<bool> DeleteAsync(int id)

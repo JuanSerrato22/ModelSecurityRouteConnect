@@ -4,11 +4,11 @@ using Entity.Model.Base;
 
 namespace Entity.Model
 {
-    public class Payment : BaseEntity
+    public class Payment : GenericModel
     {
-        public required string PaymentMethod { get; set; }
+        public string? PaymentMethod { get; set; }
         public decimal Amount { get; set; }
-        public required string Activity { get; set; }
+        public string? Activity { get; set; }
         public DateTime PaymentDate { get; set; }
     }
 }

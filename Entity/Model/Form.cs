@@ -3,9 +3,9 @@ using Entity.Model.Base;
 
 namespace Entity.Model
 {
-    public class Form : BaseEntity
+    public class Form : GenericModel
     {
         public int Code { get; set; }
-        public required string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Business.Interfaces;
+﻿using Business.Implements;
+using Business.Interfaces;
 using Entity.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -45,6 +46,35 @@ namespace Web.Controllers.Implements
             var updated = await _changeLogService.UpdateAsync(id, changeLogDto);
             if (updated == null) return NotFound();
             return Ok(updated);
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdatePartial(int id, [FromBody] ChangeLogDTO changeLogDto)
+        {
+            if (changeLogDto == null) return BadRequest();
+
+            // Obtener la changeLoga existente
+            var changeLog = await _changeLogService.GetByIdAsync(id);
+            if (changeLog == null) return NotFound();
+
+            // Actualizar solo los campos que vienen distintos de null
+            var updatedChangeLog = new ChangeLogDTO
+            {
+                Id = changeLog.Id,
+                Description = changeLogDto.Description ?? changeLog.Description,
+            };
+
+            var updated = await _changeLogService.UpdateAsync(id, updatedChangeLog);
+            return Ok(updated);
+        }
+
+
+        [HttpDelete("soft/{id}")]
+        public async Task<IActionResult> SoftDelete(int id)
+        {
+            var deleted = await _changeLogService.SoftDeleteAsync(id);
+            if (!deleted) return NotFound();
+            return NoContent();
         }
 
         [HttpDelete("{id}")]

@@ -74,7 +74,7 @@ namespace Web.Controllers.Implements
 
 
         [HttpDelete("soft/{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> SoftDelete(int id)
         {
             var deleted = await _personService.SoftDeleteAsync(id);
             if (!deleted) return NotFound();
@@ -82,7 +82,7 @@ namespace Web.Controllers.Implements
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> SoftDelete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var deleted = await _personService.DeleteAsync(id);
             if (!deleted) return NotFound();

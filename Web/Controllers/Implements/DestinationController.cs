@@ -1,4 +1,5 @@
-﻿using Business.Interfaces;
+﻿using Business.Implements;
+using Business.Interfaces;
 using Entity.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -45,6 +46,41 @@ namespace Web.Controllers.Implements
             var updated = await _destinationService.UpdateAsync(id, destinationDto);
             if (updated == null) return NotFound();
             return Ok(updated);
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdatePartial(int id, [FromBody] DestinationDTO destinationDto)
+        {
+            if (destinationDto == null) return BadRequest();
+
+            // Obtener la destinationa existente
+            var destination = await _destinationService.GetByIdAsync(id);
+            if (destination == null) return NotFound();
+
+            // Actualizar solo los campos que vienen distintos de null
+            var updatedDestination = new DestinationDTO
+            {
+                Id = destination.Id,
+                Name = destinationDto.Name ?? destination.Name,
+                Description = destinationDto.Description ?? destination.Description,
+                Country = destinationDto.Country ?? destination.Country,
+                Region = destinationDto.Region ?? destination.Region,
+                Latitude = destinationDto.Latitude ?? destination.Latitude,
+                Longitude = destinationDto.Longitude ?? destination.Longitude
+
+            };
+
+            var updated = await _destinationService.UpdateAsync(id, updatedDestination);
+            return Ok(updated);
+        }
+
+
+        [HttpDelete("soft/{id}")]
+        public async Task<IActionResult> SoftDelete(int id)
+        {
+            var deleted = await _destinationService.SoftDeleteAsync(id);
+            if (!deleted) return NotFound();
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
