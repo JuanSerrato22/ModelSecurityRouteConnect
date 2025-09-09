@@ -5,6 +5,8 @@ using Entity.Model;
 using Entity.DTO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.JsonPatch;
+
 
 namespace Business.Implements
 {
@@ -51,6 +53,32 @@ namespace Business.Implements
 
             var actualizado = await _personRepository.UpdateAsync(person);
             return _mapper.Map<PersonDTO>(actualizado);
+        }
+
+        public async Task<PersonDTO> UpdatePartialAsync(int id, JsonPatchDocument<PersonDTO> patchDoc)
+        {
+            var person = await _personRepository.GetByIdAsync(id);
+            if (person == null) return null!;
+
+            var personDto = _mapper.Map<PersonDTO>(person);
+            patchDoc.ApplyTo(personDto);
+
+            // Mapea de nuevo a la entidad y actualiza
+            _mapper.Map(personDto, person);
+            var updated = await _personRepository.UpdateAsync(person);
+            return _mapper.Map<PersonDTO>(updated);
+        }
+
+        public async Task<bool> SoftDeleteAsync(int id)
+        {
+            var person = await _personRepository.GetByIdAsync(id);
+            if (person == null) return false;
+
+            person.Active = false;
+            person.DeleteAt = DateTime.Now;
+
+            await _personRepository.UpdateAsync(person);
+            return true;
         }
 
         public async Task<bool> DeleteAsync(int id)

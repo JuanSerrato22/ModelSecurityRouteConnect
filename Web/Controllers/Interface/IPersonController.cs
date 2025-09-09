@@ -1,6 +1,7 @@
-﻿using Entity.Model;
+﻿using Entity.DTO;
+using Entity.Model;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Entity.DTO;
 using System.Threading.Tasks;
 
 namespace Web.Controllers.Interface
@@ -11,6 +12,8 @@ namespace Web.Controllers.Interface
         Task<IActionResult> GetById(int id);
         Task<IActionResult> Create(PersonDTO personDto);
         Task<IActionResult> Update(int id, PersonDTO personDto);
+        Task<IActionResult> UpdatePartial(int id, PersonDTO personDTO);
+        Task<IActionResult> SoftDelete(int id);
         Task<IActionResult> Delete(int id);
     }
 }

@@ -7,5 +7,27 @@ namespace Entity.Model.Base
         public int Id { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? DeleteAt { get; set; }
+
+        // Constructor para inicializar CreatedAt
+        protected BaseEntity()
+        {
+            CreatedAt = DateTime.UtcNow;
+            DeleteAt = null;
+        }
+
+        // Método de soft delete
+        public void SoftDelete()
+        {
+            DeleteAt = DateTime.UtcNow;
+        }
+
+        // Reactivar
+        public void Restore()
+        {
+            DeleteAt = null;
+        }
+
+        // Verificar si está activo
+        public bool IsActive() => DeleteAt == null;
     }
 }

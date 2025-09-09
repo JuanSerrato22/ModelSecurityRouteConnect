@@ -1,5 +1,6 @@
 ﻿using Business.Interfaces;
 using Entity.DTO;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Web.Controllers.Interface;
@@ -47,8 +48,41 @@ namespace Web.Controllers.Implements
             return Ok(updated);
         }
 
-        [HttpDelete("{id}")]
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdatePartial(int id, [FromBody] PersonDTO personDto)
+        {
+            if (personDto == null) return BadRequest();
+
+            // Obtener la persona existente
+            var person = await _personService.GetByIdAsync(id);
+            if (person == null) return NotFound();
+
+            // Actualizar solo los campos que vienen distintos de null
+            var updatedPerson = new PersonDTO
+            {
+                Id = person.Id,
+                FirstName = personDto.FirstName ?? person.FirstName,
+                LastName = personDto.LastName ?? person.LastName,
+                Document = personDto.Document != 0 ? personDto.Document : person.Document,
+                PhoneNumber = personDto.PhoneNumber != 0 ? personDto.PhoneNumber : person.PhoneNumber,
+                Email = personDto.Email ?? person.Email
+            };
+
+            var updated = await _personService.UpdateAsync(id, updatedPerson);
+            return Ok(updated);
+        }
+
+
+        [HttpDelete("soft/{id}")]
         public async Task<IActionResult> Delete(int id)
+        {
+            var deleted = await _personService.SoftDeleteAsync(id);
+            if (!deleted) return NotFound();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> SoftDelete(int id)
         {
             var deleted = await _personService.DeleteAsync(id);
             if (!deleted) return NotFound();
